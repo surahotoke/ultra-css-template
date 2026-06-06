@@ -1,0 +1,29 @@
+@property --column-index {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --column-count {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --column-generator-column-i {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --column-generator-loading-percent {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --column-generator-decode {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}

@@ -1,0 +1,62 @@
+<style>
+
+@import url(column-generator/style.css);
+
+/* ::column::scroll-markerなどをカスタムする */
+
+div {
+  width: 100px;
+  height: 100px;
+  padding: 100px;
+  border: solid;
+  --column-width: 62px;
+  --column-height: 66px;
+  --column-gap: 200px;
+  --row-gap: 200px;
+}
+
+::after {
+  background: red;
+}
+
+::column {
+  scroll-snap-align: center;
+}
+
+::column::scroll-marker {
+  content: counter(column-index);
+  background: green;
+  width: calc(--column-index() * 5px);
+}
+
+::column::scroll-marker:hover {
+  content: --role(world, 'aaa');
+}
+
+@function --to-class(--index <integer>) returns <custom-ident> {
+  result: if(
+    style(--index: 4): hello;
+  );
+}
+
+@function --to-role() returns <custom-ident> {
+  result: if(
+    style(--class: hello): world;
+  );
+}
+
+@function --to-element() returns <custom-ident> {
+  result: if(
+    style(--role: hello): div;
+    style(--class: hello): div;
+    else: div;
+  );
+}
+
+@function --is-tap() returns <integer> {
+  result: if(else: 0);
+}
+
+</style>
+
+<div col-count="5" row-count="4" mapping navigate></div>

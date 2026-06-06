@@ -1,0 +1,11 @@
+@property --api-getter-decode-w {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+
+@property --api-getter-decode-h {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}

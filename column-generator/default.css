@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  overflow: hidden;
+}
+
+div {
+  --n: attr(columns type(<integer>), 1);
+  display: block;
+  min-height: calc(var(--n) * 1px);
+  height: 0;
+  gap: 0;
+  overflow: auto;
+  columns: var(--n);
+  scroll-marker-group: before;
+}
+
+::after {
+  content: '';
+  display: block;
+  height: 100%;
+}
+
+::scroll-marker-group {
+  overflow: auto;
+  counter-reset: column-index;
+}
+
+::column::scroll-marker {
+  all: initial;
+  content: '';
+  display: block;
+  counter-increment: column-index;
+}

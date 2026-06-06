@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ultra-css template</title>
+  <link rel="stylesheet" href="utility.css">
+  <link rel="stylesheet" href="property/style.css">
+  <link rel="stylesheet" href="style.css">
+  <template define="api-getter" page="components/api-getter.html"></template>
+  <template define="column-generator-demo" page="components/column-generator-demo.html"></template>
+  <template define="current-time" page="components/current-time.html"></template>
+</head>
+<body onload="(async()=>{r=_=>e.attributes.removeNamedItem(_).value;while((d=document)[q='querySelectorAll']`[page]`[0])await Promise.all([...d[q]`[page]`].map(async _=>(e=_).innerHTML=await(await fetch(r`page`)).text()));c=_=>{for(e of[..._[q]`[count]`].reverse())for(_=r`count`;--_>0;)e.after(e.cloneNode(1))};c(d);d[q]`template[define]`.forEach(_=>customElements.define(_.getAttribute`define`,class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(_.cloneNode(1))},c(_=_.content)))})()">
+  <column-generator-demo></column-generator-demo>
+  <current-time></current-time>
+</body>
+</html>

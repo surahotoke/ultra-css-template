@@ -1,0 +1,149 @@
+[mapping] {
+  --init-unit-duration: .1s;
+  --init-duration: calc(var(--n) * var(--init-unit-duration));
+  animation: column-init var(--init-duration) steps(var(--n), jump-start) both;
+  --column-count: var(--column-generator-column-i);
+  columns: --column-count();
+}
+
+[mapping]::before {
+  background: #aaaa;
+  --column-generator-loading-percent: calc(100 * progress(--column-count(), 0,  var(--n) - 1));
+  transition: --column-generator-loading-percent var(--init-unit-duration) linear;
+  @starting-style { --column-generator-loading-percent: 0 }
+  counter-reset: loading var(--column-generator-loading-percent);
+  content: 'loading... ' counter(loading, decimal-leading-zero) '\9%';
+  position: absolute;
+  position-anchor: --main;
+  position-area: center;
+  width: stretch;
+  height: stretch;
+  display: --loaded(none, grid);
+  place-content: center;
+}
+
+[mapping]::scroll-marker-group {
+  anchor-name: --main;
+}
+
+[mapping]::column {
+  animation: column-init var(--init-duration) linear reverse --loaded(paused, running);
+  --column-index: var(--column-generator-column-i);
+  --class: --loaded(--to-class(var(--column-index)));
+  --role: --to-role();
+  --element: --to-element();
+}
+
+@function --column-count() returns <integer> {
+  result: var(--column-count);
+}
+
+@function --column-index() returns <integer> {
+  result: var(--column-index);
+}
+
+@function --loaded(--value, --fallback: _) {
+  result: if(
+    style(--n: --column-count()): var(--value);
+    style(--fallback: _):;
+    else: var(--fallback);
+  );
+}
+
+@keyframes column-init {
+  to { --column-generator-column-i: var(--n) }
+}
+
+@function --element(--target-element <custom-ident>, --match-value, --fallback: .) {
+  result: if(
+    style(--element: var(--target-element)): var(--match-value);
+    style(--fallback: .): revert-rule;
+    style(--fallback: _):;
+    else: var(--fallback);
+  );
+}
+
+@function --role(--target-role <custom-ident>, --match-value, --fallback: .) {
+  result: if(
+    style(--role: var(--target-role)): var(--match-value);
+    style(--fallback: .): revert-rule;
+    style(--fallback: _):;
+    else: var(--fallback);
+  );
+}
+
+@function --class(--target-class <custom-ident>, --match-value, --fallback: .) {
+  result: if(
+    style(--class: var(--target-class)): var(--match-value);
+    style(--fallback: .): revert-rule;
+    style(--fallback: _):;
+    else: var(--fallback);
+  );
+}
+
+/* hoist */
+
+:host:has([mapping]) {
+  counter-reset: active-index hoist-state;
+}
+
+[mapping]::column::scroll-marker:hover:active {
+  counter-increment: column-index active-index --column-index();
+}
+
+[mapping]::column::scroll-marker:active {
+  transition: if(style(--is-tap() = 1): pointer-events linear 75ms allow-discrete);
+  pointer-events: if(style(--is-tap() = 1): none);
+}
+
+:host:has([mapping])::after {
+  content: counter(hoist-state, encode-w1) counter(active-index, encode-w0);
+  display: block;
+  white-space: pre;
+  font-size: 0;
+  line-height: 1px;
+  letter-spacing: 1px;
+  word-spacing: 120px;
+  text-indent: 100%;
+}
+
+:host:has([mapping]) {
+  animation: decode linear;
+  animation-timeline: scroll(self x);
+  animation-range: -1px;
+  --active-index: --decode(0);
+  --active-class: --to-class(var(--active-index));
+}
+
+@counter-style encode-w0 {
+  system: symbolic;
+  symbols: '　';
+  fallback: -none;
+}
+
+@counter-style encode-w1 {
+  system: symbolic;
+  symbols: ' ';
+  fallback: -none;
+}
+
+@function --active-class(--target-class <custom-ident>, --match-value, --fallback) {
+  result: if(
+    style(--active-class: var(--target-class)): var(--match-value);
+    style(--fallback: .):;
+    else: var(--fallback);
+  );
+}
+
+@function --decode(--k <integer>) returns <integer> {
+  --x: round(1 / var(--column-generator-decode) - 1);
+  result: if(
+    style(--k: 0): mod(var(--x), 121);
+    style(--k: 1): round(down, var(--x) / 121);
+  );
+}
+
+@keyframes decode {
+  from { --column-generator-decode: 0 }
+  to { --column-generator-decode: 1 }
+}

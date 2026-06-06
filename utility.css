@@ -1,0 +1,19 @@
+@function --get-bit(--x <integer>, --k <integer>: 0) returns <integer> {
+  result: mod(round(down, var(--x) / pow(2, var(--k))), 2);
+}
+
+@function --len(--num <integer>) returns <integer> {
+  result: if(
+    style(--num: 0): 1;
+    else: calc(1 + round(down, log(abs(var(--num)), 10)));
+  );
+}
+
+@function --random(--num <integer>, --seed <number>: 0) returns <integer> {
+  result: round(mod(524287 * sin(999983 * (var(--num) + 5007)) * (91 + 29 * cos(524287 * var(--seed))), 8191));
+}
+
+@counter-style -none {
+  system: cyclic;
+  symbols: '';
+}

@@ -1,0 +1,34 @@
+<style>
+
+api-getter {
+  --time: var(--data-width);
+  counter-reset:
+    hour --get-time(h)
+    minute --get-time(m)
+    second --get-time(s);
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  &::after {
+    content:
+      counter(hour, decimal-leading-zero) ':'
+      counter(minute, decimal-leading-zero) ':'
+      counter(second, decimal-leading-zero);
+  }
+}
+
+@function --get-time(--t type(h | m | s)) returns <integer> {
+  result: if(
+    style(--t: h): mod(round(down, var(--time) / 3600), 24);
+    style(--t: m): mod(round(down, var(--time) / 60), 60);
+    style(--t: s): mod(var(--time), 60);
+  );
+}
+
+</style>
+
+<api-getter style="--api: url(https://css-api.surahotoke.workers.dev/?width=current-time)">
+  <div class="time"></div>
+</api-getter>

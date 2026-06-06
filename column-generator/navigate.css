@@ -1,0 +1,57 @@
+:where([navigate]) {
+  --column-gap: var(--gap, 0px);
+  --row-gap: var(--gap, 0px);
+}
+
+[navigate] {
+  --_n: attr(columns type(<integer>), 1);
+  --col-n: attr(col-count type(<integer>), var(--_n));
+  --row-n: attr(row-count type(<integer>), 1);
+  --n: --_get-n();
+  columns: var(--col-n) / var(--column-height);
+  gap: var(--row-gap) calc(var(--column-width) + var(--column-gap));
+  scroll-padding-right: var(--column-width);
+  animation: adjust-offset both;
+  animation-composition: add;
+  anchor-name: --main;
+}
+
+[navigate]::after {
+  width: var(--column-width);
+  height: calc(var(--n) * var(--column-height));
+}
+
+[navigate]::scroll-marker-group {
+  position: absolute;
+  position-anchor: --main;
+  position-area: center;
+  width: stretch;
+  height: stretch;
+  overflow: auto;
+  scrollbar-width: none;
+  pointer-events: none;
+}
+
+@function --_get-n() returns <integer> {
+  result: calc(var(--col-n) * var(--row-n));
+}
+
+@keyframes adjust-offset {
+  to {
+    width: calc(-1 * var(--column-width));
+    padding-right: var(--column-width);
+  }
+}
+
+/* +mapping */
+
+[mapping][navigate] {
+  column-count: --loaded(var(--col-n), 1);
+  animation:
+    column-init var(--init-duration) steps(var(--n), jump-start) both,
+    adjust-offset both;
+}
+
+[mapping][navigate]::after {
+  height: calc(--column-count() * var(--column-height));
+}

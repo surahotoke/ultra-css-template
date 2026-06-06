@@ -1,0 +1,47 @@
+<style>
+
+:host {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  animation: linear;
+  animation-name: decode-w, decode-h;
+  animation-timeline: scroll(self x), scroll(self);
+  animation-range: -1px;
+  --data-width: --_decode(w);
+  --data-height: --_decode(h);
+}
+
+:host::before {
+  font-size: 0;
+  content: var(--api);
+  display: inline flow-root;
+  padding-left: 100%;
+}
+
+:host::after {
+  content: '';
+  display: block;
+  height: 100%;
+}
+
+@function --_decode(--s type(w | h)) returns <integer> {
+  result: if(
+    style(--s: w): round(down, 1 / var(--api-getter-decode-w) - 1);
+    style(--s: h): round(down, 1 / var(--api-getter-decode-h) - 1);
+  );
+}
+
+@keyframes decode-w {
+  from { --api-getter-decode-w: 0 }
+  to { --api-getter-decode-w: 1 }
+}
+
+@keyframes decode-h {
+  from { --api-getter-decode-h: 0 }
+  to { --api-getter-decode-h: 1 }
+}
+
+</style>
+
+<slot></slot>
