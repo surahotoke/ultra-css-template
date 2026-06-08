@@ -5,8 +5,8 @@
 
 [navigate] {
   --_n: attr(columns type(<integer>), 1);
-  --col-n: attr(col-count type(<integer>), var(--_n));
-  --row-n: attr(row-count type(<integer>), 1);
+  --col-n: attr(colcount type(<integer>), var(--_n));
+  --row-n: attr(rowcount type(<integer>), 1);
   --n: --_get-n();
   columns: var(--col-n) / var(--column-height);
   gap: var(--row-gap) calc(var(--column-width) + var(--column-gap));
