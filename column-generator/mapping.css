@@ -54,7 +54,7 @@
   to { --column-generator-column-i: var(--n) }
 }
 
-@function --element(--target-element <custom-ident>, --match-value, --fallback: .) {
+@function --element(--target-element <custom-ident>, --match-value: 1, --fallback: .) {
   result: if(
     style(--element: var(--target-element)): var(--match-value);
     style(--fallback: .): revert-rule;
@@ -63,7 +63,7 @@
   );
 }
 
-@function --role(--target-role <custom-ident>, --match-value, --fallback: .) {
+@function --role(--target-role <custom-ident>, --match-value: 1, --fallback: .) {
   result: if(
     style(--role: var(--target-role)): var(--match-value);
     style(--fallback: .): revert-rule;
@@ -72,7 +72,7 @@
   );
 }
 
-@function --class(--target-class <custom-ident>, --match-value, --fallback: .) {
+@function --class(--target-class <custom-ident>, --match-value: 1, --fallback: .) {
   result: if(
     style(--class: var(--target-class)): var(--match-value);
     style(--fallback: .): revert-rule;
@@ -92,8 +92,8 @@
 }
 
 [mapping]::column::scroll-marker:active {
-  transition: if(style(--is-tap() = 1): pointer-events linear 75ms allow-discrete);
-  pointer-events: if(style(--is-tap() = 1): none);
+  transition: if(style(--is-tap: 1): pointer-events linear 75ms allow-discrete);
+  pointer-events: if(style(--is-tap: 1): none);
 }
 
 :host:has([mapping])::after {
