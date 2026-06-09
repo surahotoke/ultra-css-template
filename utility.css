@@ -13,6 +13,13 @@
   result: round(mod(524287 * sin(999983 * (var(--num) + 5007)) * (91 + 29 * cos(524287 * var(--seed))), 8191));
 }
 
+@function --comma(--value:) {
+  result: if(
+    style(--value:):;
+    else: var(--value) ,;
+  );
+}
+
 @counter-style -none {
   system: cyclic;
   symbols: '';

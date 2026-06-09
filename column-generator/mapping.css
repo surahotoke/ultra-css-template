@@ -1,7 +1,8 @@
 [mapping] {
   --init-unit-duration: .1s;
   --init-duration: calc(var(--n) * var(--init-unit-duration));
-  animation: column-init var(--init-duration) steps(var(--n), jump-start) both;
+  --column-generator-animation: column-init var(--init-duration) steps(var(--n), jump-start) both;
+  animation: var(--column-generator-animation);
   --column-count: var(--column-generator-column-i);
   columns: --column-count();
 }
@@ -9,7 +10,8 @@
 [mapping]::before {
   background: #aaaa;
   --column-generator-loading-percent: calc(100 * progress(--column-count(), 0,  var(--n) - 1));
-  transition: --column-generator-loading-percent var(--init-unit-duration) linear;
+  --column-generator-transition: --column-generator-loading-percent var(--init-unit-duration) linear;
+  transition: var(--column-generator-transition);
   @starting-style { --column-generator-loading-percent: 0 }
   counter-reset: loading var(--column-generator-loading-percent);
   content: 'loading... ' counter(loading, decimal-leading-zero) '\9%';
@@ -92,8 +94,9 @@
 }
 
 [mapping]::column::scroll-marker:active {
-  transition: if(style(--is-tap: 1): pointer-events linear 75ms allow-discrete);
-  pointer-events: if(style(--is-tap: 1): none);
+  --column-generator-transition: if(style(--pulse-tap: 1): pointer-events linear 75ms allow-discrete);
+  transition: var(--column-generator-transition);
+  pointer-events: if(style(--pulse-tap: 1): none);
 }
 
 :host:has([mapping])::after {

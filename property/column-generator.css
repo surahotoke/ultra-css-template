@@ -10,6 +10,18 @@
   initial-value: 0;
 }
 
+@property --column-generator-animation {
+  syntax: '*';
+  inherits: false;
+  initial-value:;
+}
+
+@property --column-generator-transition {
+  syntax: '*';
+  inherits: false;
+  initial-value:;
+}
+
 @property --column-generator-column-i {
   syntax: '<integer>';
   inherits: false;

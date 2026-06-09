@@ -11,7 +11,8 @@
   columns: var(--col-n) / var(--column-height);
   gap: var(--row-gap) calc(var(--column-width) + var(--column-gap));
   scroll-padding-right: var(--column-width);
-  animation: adjust-offset both;
+  --column-generator-animation: adjust-offset both;
+  animation: var(--column-generator-animation);
   animation-composition: add;
   anchor-name: --main;
 }
@@ -47,7 +48,7 @@
 
 [mapping][navigate] {
   column-count: --loaded(var(--col-n), 1);
-  animation:
+  --column-generator-animation:
     column-init var(--init-duration) steps(var(--n), jump-start) both,
     adjust-offset both;
 }
