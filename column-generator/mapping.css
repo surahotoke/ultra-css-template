@@ -36,10 +36,6 @@
   --element: --to-element();
 }
 
-@function --column-count() returns <integer> {
-  result: var(--column-count);
-}
-
 @function --column-index() returns <integer> {
   result: var(--column-index);
 }

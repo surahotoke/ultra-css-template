@@ -5,6 +5,7 @@
 
 div {
   --n: attr(columns type(<integer>), 1);
+  --column-count: var(--n);
   display: block;
   min-height: calc(var(--n) * 1px);
   height: 0;
@@ -30,4 +31,8 @@ div {
   content: '';
   display: block;
   counter-increment: column-index;
+}
+
+@function --column-count() returns <integer> {
+  result: var(--column-count);
 }
