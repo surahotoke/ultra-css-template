@@ -43,16 +43,3 @@
     padding-right: var(--column-width);
   }
 }
-
-/* +mapping */
-
-[mapping][navigate] {
-  column-count: --loaded(var(--col-n), 1);
-  --column-generator-animation:
-    column-init var(--init-duration) steps(var(--n), jump-start) both,
-    adjust-offset both;
-}
-
-[mapping][navigate]::after {
-  height: calc(--column-count() * var(--column-height));
-}

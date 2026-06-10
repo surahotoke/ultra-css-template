@@ -1,0 +1,80 @@
+/* navigate && mapping */
+
+[mapping][navigate] {
+  column-count: --loaded(var(--col-n), 1);
+  --column-generator-animation:
+    column-init var(--init-duration) steps(var(--n), jump-start) both,
+    adjust-offset both;
+}
+
+[mapping][navigate]::after {
+  height: calc(--column-count() * var(--column-height));
+}
+
+/* mapping | self-mapping (hoist) */
+
+:host:has(:is([mapping], [self-mapping])) {
+  counter-reset: active-index hoist-state;
+}
+
+:is([mapping], [self-mapping])::column::scroll-marker:hover:active {
+  counter-increment: column-index active-index --column-index();
+}
+
+:is([mapping], [self-mapping])::column::scroll-marker:active {
+  --column-generator-transition: if(style(--pulse-tap: 1): pointer-events linear 75ms allow-discrete);
+  transition: var(--column-generator-transition);
+  pointer-events: if(style(--pulse-tap: 1): none);
+}
+
+:host:has(:is([mapping], [self-mapping]))::after {
+  content: counter(hoist-state, encode-w1) counter(active-index, encode-w0);
+  display: block;
+  white-space: pre;
+  font-size: 0;
+  line-height: 1px;
+  letter-spacing: 1px;
+  word-spacing: 120px;
+  text-indent: 100%;
+}
+
+:host:has(:is([mapping], [self-mapping])) {
+  animation: decode linear;
+  animation-timeline: scroll(self x);
+  animation-range: -1px;
+  --active-index: --decode(0);
+  --active-class: --to-class(var(--active-index));
+}
+
+@counter-style encode-w0 {
+  system: symbolic;
+  symbols: '　';
+  fallback: -none;
+}
+
+@counter-style encode-w1 {
+  system: symbolic;
+  symbols: ' ';
+  fallback: -none;
+}
+
+@function --active-class(--target-class <custom-ident>, --match-value, --fallback) {
+  result: if(
+    style(--active-class: var(--target-class)): var(--match-value);
+    style(--fallback: .):;
+    else: var(--fallback);
+  );
+}
+
+@function --decode(--k <integer>) returns <integer> {
+  --x: round(1 / var(--column-generator-decode) - 1);
+  result: if(
+    style(--k: 0): mod(var(--x), 121);
+    style(--k: 1): round(down, var(--x) / 121);
+  );
+}
+
+@keyframes decode {
+  from { --column-generator-decode: 0 }
+  to { --column-generator-decode: 1 }
+}

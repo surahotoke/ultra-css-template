@@ -5,7 +5,11 @@
   animation: var(--column-generator-animation);
   animation-timeline: view(x), view();
   animation-range: contain cover;
-  --class: --to-class(var(--column-position-x), var(--column-position-y));
+  --column-index: --to-index(var(--column-position-x), var(--column-position-y));
+  --class: --to-class(if(
+    style(--column-index: initial): var(--column-position-x), var(--column-position-y);
+    else: --column-index();
+  ));
   --role: --to-role();
   --element: --to-element();
 }
