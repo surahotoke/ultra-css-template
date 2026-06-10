@@ -4,9 +4,9 @@
   );
 }
 
-@function --to-class(--x <number>, --y <number>) returns <custom-ident> {
+@function --to-class(--x <percentage>, --y <percentage>) returns <custom-ident> {
   result: if(
-    style((--x: 34) and (--y: 24)): hello;
+    style((--x: 34%) and (--y: 24%)): hello;
   );
 }
 
