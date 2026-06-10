@@ -1,0 +1,19 @@
+[self-mapping]::column::scroll-marker {
+  --column-generator-animation:
+    position-x linear reverse,
+    position-y linear reverse;
+  animation: var(--column-generator-animation);
+  animation-timeline: view(x), view();
+  animation-range: contain cover;
+  --class: --to-class(var(--column-position-x), var(--column-position-y));
+  --role: --to-role();
+  --element: --to-element();
+}
+
+@keyframes position-x {
+  to { --column-position-x: 100% }
+}
+
+@keyframes position-y {
+  to { --column-position-y: 100% }
+}

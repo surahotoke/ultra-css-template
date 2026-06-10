@@ -1,13 +1,25 @@
+@property --column-count {
+  syntax: '<integer>';
+  inherits: true;
+  initial-value: 0;
+}
+
 @property --column-index {
   syntax: '<integer>';
   inherits: true;
   initial-value: 0;
 }
 
-@property --column-count {
-  syntax: '<integer>';
-  inherits: true;
-  initial-value: 0;
+@property --column-position-x {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+@property --column-position-y {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
 }
 
 @property --column-generator-animation {
@@ -38,16 +50,4 @@
   syntax: '<number>';
   inherits: false;
   initial-value: 1;
-}
-
-@property --column-generator-position-x {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
-
-@property --column-generator-position-y {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
 }
