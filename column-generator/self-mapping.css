@@ -11,9 +11,11 @@
 }
 
 @keyframes position-x {
+  from { --column-position-x: 0% }
   to { --column-position-x: 100% }
 }
 
 @keyframes position-y {
+  from { --column-position-y: 0% }
   to { --column-position-y: 100% }
 }
