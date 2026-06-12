@@ -4,7 +4,7 @@
   column-count: --loaded(var(--col-n), 1);
   --column-generator-animation:
     column-generator-init var(--init-duration) steps(var(--n), jump-start) both,
-    adjust-offset both;
+    column-generator-adjust-offset both;
 }
 
 [mapping][navigate]::after {
