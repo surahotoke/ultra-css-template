@@ -29,6 +29,7 @@
 
 :host:has(:is([mapping], [self-mapping]))::after {
   content: counter(hoist-state, encode-w1) counter(active-index, encode-w0);
+  position: absolute;
   display: block;
   white-space: pre;
   width: 0;
