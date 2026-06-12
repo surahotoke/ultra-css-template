@@ -3,7 +3,7 @@
   animation:
     column-generator-position-x linear reverse,
     column-generator-position-y linear reverse;
-  animation-timeline: --a, --b;
+  animation-timeline: --column-generator-position-x, --column-generator-position-y;
   animation-range: contain cover;
   --column-index: --to-index(var(--column-position-x), var(--column-position-y));
   --class: --to-class(if(
