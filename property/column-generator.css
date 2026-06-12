@@ -12,13 +12,13 @@
 
 @property --column-position-x {
   syntax: '<percentage>';
-  inherits: false;
+  inherits: true;
   initial-value: -1%;
 }
 
 @property --column-position-y {
   syntax: '<percentage>';
-  inherits: false;
+  inherits: true;
   initial-value: -1%;
 }
 
