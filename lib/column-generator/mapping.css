@@ -1,7 +1,7 @@
 [mapping] {
   --init-unit-duration: .1s;
   --init-duration: calc(var(--n) * var(--init-unit-duration));
-  --column-generator-animation: column-init var(--init-duration) steps(var(--n), jump-start) both;
+  --column-generator-animation: column-generator-init var(--init-duration) steps(var(--n), jump-start) both;
   animation: var(--column-generator-animation);
   --column-count: var(--column-generator-column-i);
   columns: --column-count();
@@ -29,7 +29,7 @@
 }
 
 [mapping]::column {
-  animation: column-init var(--init-duration) linear reverse --loaded(paused, running);
+  animation: column-generator-init var(--init-duration) linear reverse --loaded(paused, running);
   --column-index: var(--column-generator-column-i);
   --class: --loaded(--to-class(var(--column-index)));
   --role: --to-role();
@@ -46,10 +46,6 @@
     style(--fallback: _):;
     else: var(--fallback);
   );
-}
-
-@keyframes column-init {
-  to { --column-generator-column-i: var(--n) }
 }
 
 @function --element(--target-element <custom-ident>, --match-value: 1, --fallback: .) {
@@ -77,4 +73,8 @@
     style(--fallback: _):;
     else: var(--fallback);
   );
+}
+
+@keyframes column-generator-init {
+  to { --column-generator-column-i: var(--n) }
 }

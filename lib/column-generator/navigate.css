@@ -7,11 +7,11 @@
   --_n: attr(columns type(<integer>), 1);
   --col-n: attr(colcount type(<integer>), var(--_n));
   --row-n: attr(rowcount type(<integer>), 1);
-  --n: --_get-n();
+  --n: --column-generator-get-n();
   columns: var(--col-n) / var(--column-height);
   gap: var(--row-gap) calc(var(--column-width) + var(--column-gap));
   scroll-padding-right: var(--column-width);
-  --column-generator-animation: adjust-offset both;
+  --column-generator-animation: column-generator-adjust-offset both;
   animation: var(--column-generator-animation);
   animation-composition: add;
   anchor-name: --main;
@@ -33,11 +33,11 @@
   pointer-events: none;
 }
 
-@function --_get-n() returns <integer> {
+@function --column-generator-get-n() returns <integer> {
   result: calc(var(--col-n) * var(--row-n));
 }
 
-@keyframes adjust-offset {
+@keyframes column-generator-adjust-offset {
   to {
     width: calc(-1 * var(--column-width));
     padding-right: var(--column-width);

@@ -1,7 +1,7 @@
 [self-mapping]::column::scroll-marker {
   --column-generator-animation:
-    position-x linear reverse,
-    position-y linear reverse;
+    column-generator-position-x linear reverse,
+    column-generator-position-y linear reverse;
   animation: var(--column-generator-animation);
   animation-timeline: view(x), view();
   animation-range: contain cover;
@@ -14,12 +14,12 @@
   --element: --to-element();
 }
 
-@keyframes position-x {
+@keyframes column-generator-position-x {
   from { --column-position-x: 0% }
   to { --column-position-x: 100% }
 }
 
-@keyframes position-y {
+@keyframes column-generator-position-y {
   from { --column-position-y: 0% }
   to { --column-position-y: 100% }
 }

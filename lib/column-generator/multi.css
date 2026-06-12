@@ -3,7 +3,7 @@
 [mapping][navigate] {
   column-count: --loaded(var(--col-n), 1);
   --column-generator-animation:
-    column-init var(--init-duration) steps(var(--n), jump-start) both,
+    column-generator-init var(--init-duration) steps(var(--n), jump-start) both,
     adjust-offset both;
 }
 
@@ -28,7 +28,7 @@
 }
 
 :host:has(:is([mapping], [self-mapping]))::after {
-  content: counter(hoist-state, encode-w1) counter(active-index, encode-w0);
+  content: counter(hoist-state, column-generator-encode-w1) counter(active-index, column-generator-encode-w0);
   position: absolute;
   display: block;
   white-space: pre;
@@ -44,20 +44,20 @@
 
 :host:has(:is([mapping], [self-mapping])) {
   timeline-scope: --column-generator-state;
-  animation: decode linear;
+  animation: column-generator-decode linear;
   animation-timeline: --column-generator-state;
   animation-range: -1px;
-  --active-index: --decode(0);
+  --active-index: --column-generator-decode(0);
   --active-class: --to-class(var(--active-index));
 }
 
-@counter-style encode-w0 {
+@counter-style column-generator-encode-w0 {
   system: symbolic;
   symbols: '　';
   fallback: -none;
 }
 
-@counter-style encode-w1 {
+@counter-style column-generator-encode-w1 {
   system: symbolic;
   symbols: ' ';
   fallback: -none;
@@ -71,7 +71,7 @@
   );
 }
 
-@function --decode(--k <integer>) returns <integer> {
+@function --column-generator-decode(--k <integer>) returns <integer> {
   --x: round(1 / var(--column-generator-decode) - 1);
   result: if(
     style(--k: 0): mod(var(--x), 121);
@@ -79,7 +79,7 @@
   );
 }
 
-@keyframes decode {
+@keyframes column-generator-decode {
   from { --column-generator-decode: 0 }
   to { --column-generator-decode: 1 }
 }
