@@ -29,6 +29,10 @@ div {
   width: calc(--column-index() * 5px);
 }
 
+::column::scroll-marker {
+  content: --active-class(hello, 'bbb');
+}
+
 ::column::scroll-marker:hover {
   content: --role(world, 'aaa');
 }

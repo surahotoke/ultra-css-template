@@ -31,16 +31,20 @@
   content: counter(hoist-state, encode-w1) counter(active-index, encode-w0);
   display: block;
   white-space: pre;
+  width: 0;
+  height: 0;
   font-size: 0;
   line-height: 1px;
   letter-spacing: 1px;
   word-spacing: 120px;
-  text-indent: 100%;
+  overflow: hidden;
+  scroll-timeline: --column-generator-state x;
 }
 
 :host:has(:is([mapping], [self-mapping])) {
+  timeline-scope: --column-generator-state;
   animation: decode linear;
-  animation-timeline: scroll(self x);
+  animation-timeline: --column-generator-state;
   animation-range: -1px;
   --active-index: --decode(0);
   --active-class: --to-class(var(--active-index));
