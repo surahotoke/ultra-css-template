@@ -58,10 +58,10 @@
   fallback: -none;
 }
 
-@function --active-class(--target-class <custom-ident>, --match-value, --fallback) {
+@function --active-class(--target-class <custom-ident>, --match-value, --fallback: .) {
   result: if(
     style(--active-class: var(--target-class)): var(--match-value);
-    style(--fallback: .):;
+    style(--fallback: .): revert-rule;
     else: var(--fallback);
   );
 }
