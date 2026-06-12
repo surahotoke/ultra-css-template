@@ -13,21 +13,21 @@
 
 /* mapping | self-mapping (hoist) */
 
-:host:has(:is([mapping], [self-mapping])) {
+:host:has(:is([mapping], [selfmapping])) {
   counter-reset: active-index hoist-state;
 }
 
-:is([mapping], [self-mapping])::column::scroll-marker:hover:active {
+:is([mapping], [selfmapping])::column::scroll-marker:hover:active {
   counter-increment: column-index active-index --column-index();
 }
 
-:is([mapping], [self-mapping])::column::scroll-marker:active {
+:is([mapping], [selfmapping])::column::scroll-marker:active {
   --column-generator-transition: if(style(--pulse-tap: 1): pointer-events linear 75ms allow-discrete);
   transition: var(--column-generator-transition);
   pointer-events: if(style(--pulse-tap: 1): none);
 }
 
-:host:has(:is([mapping], [self-mapping]))::after {
+:host:has(:is([mapping], [selfmapping]))::after {
   content: counter(hoist-state, column-generator-encode-w1) counter(active-index, column-generator-encode-w0);
   position: absolute;
   display: block;
@@ -42,7 +42,7 @@
   scroll-timeline: --column-generator-state x;
 }
 
-:host:has(:is([mapping], [self-mapping])) {
+:host:has(:is([mapping], [selfmapping])) {
   timeline-scope: --column-generator-state;
   animation: column-generator-decode linear;
   animation-timeline: --column-generator-state;

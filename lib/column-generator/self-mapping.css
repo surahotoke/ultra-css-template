@@ -1,4 +1,4 @@
-[self-mapping]::column::scroll-marker {
+[selfmapping]::column::scroll-marker {
   --column-generator-animation:
     column-generator-position-x linear reverse,
     column-generator-position-y linear reverse;
