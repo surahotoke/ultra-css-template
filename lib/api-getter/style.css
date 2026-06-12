@@ -1,27 +1,26 @@
 [apiscope] {
-  timeline-scope: attr(apiscope type(*));
-}
-
-[apiscope=""] {
   timeline-scope: --api-width, --api-height;
 }
 
+[apiscope^="--"] {
+  timeline-scope: attr(apiscope type(*));
+}
+
 [apitarget] {
+  animation-timeline: --api-width, --api-height;
   --api-getter-animation:
     api-getter-decode-w linear,
     api-getter-decode-h linear;
   animation: var(--api-getter-animation);
-  animation-timeline: attr(apitarget type(*));
   animation-range: -1px;
 }
 
-[apitarget]:where(:not([apitarget=""]):not([apitarget*=","])) {
-  --api-getter-animation: api-getter-decode-w linear;
-  animation: var(--api-getter-animation);
+[apitarget^="--"] {
+  animation-timeline: attr(apitarget type(*));
 }
 
-[apitarget=""] {
-  animation-timeline: --api-width, --api-height;
+[apitarget^="--"]:not([apitarget*=","]) {
+  --api-getter-animation: api-getter-decode-w linear;
 }
 
 @function --api-data(--s type(w | h)) returns <integer> {

@@ -9,9 +9,16 @@
   content: var(--api);
   display: inline flow-root;
   overflow: hidden;
-  --_: --api-width, --api-height;
-  scroll-timeline: attr(apiname type(*), var(--_));
+  scroll-timeline: --api-width, --api-height;
   scroll-timeline-axis: x, y;
+}
+
+:host([apiname^="--"])::before {
+  scroll-timeline-name: attr(apiname type(*));
+}
+
+:host([apiname^="--"]:not([apiname*=","]))::before {
+  scroll-timeline-axis: x;
 }
 
 </style>
