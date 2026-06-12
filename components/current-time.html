@@ -1,16 +1,13 @@
 <style>
 
-api-getter {
-  --time: var(--data-width);
+@import url(lib/api-getter/style.css);
+
+.time {
+  --time: --api-data(w);
   counter-reset:
     hour --get-time(h)
     minute --get-time(m)
     second --get-time(s);
-}
-
-.time {
-  position: absolute;
-  top: 0;
   &::after {
     content:
       counter(hour, decimal-leading-zero) ':'
@@ -29,6 +26,7 @@ api-getter {
 
 </style>
 
-<api-getter style="--api: url(https://css-api.surahotoke.workers.dev/?width=current-time)">
-  <div class="time"></div>
-</api-getter>
+<div class="container" apiscope>
+  <api-getter style="--api: url(https://css-api.surahotoke.workers.dev/?width=current-time)"></api-getter>
+  <div class="time" apitarget></div>
+</div>

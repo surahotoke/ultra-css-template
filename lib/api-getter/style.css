@@ -1,0 +1,42 @@
+[apiscope] {
+  timeline-scope: attr(apiscope type(*));
+}
+
+[apiscope=""] {
+  timeline-scope: --api-width, --api-height;
+}
+
+[apitarget] {
+  --api-getter-animation:
+    api-getter-decode-w linear,
+    api-getter-decode-h linear;
+  animation: var(--api-getter-animation);
+  animation-timeline: attr(apitarget type(*));
+  animation-range: -1px;
+}
+
+[apitarget]:where(:not([apitarget=""]):not([apitarget*=","])) {
+  --api-getter-animation: api-getter-decode-w linear;
+  animation: var(--api-getter-animation);
+}
+
+[apitarget=""] {
+  animation-timeline: --api-width, --api-height;
+}
+
+@function --api-data(--s type(w | h)) returns <integer> {
+  result: if(
+    style(--s: w): round(down, 1 / var(--api-getter-decode-w) - 1);
+    style(--s: h): round(down, 1 / var(--api-getter-decode-h) - 1);
+  );
+}
+
+@keyframes api-getter-decode-w {
+  from { --api-getter-decode-w: 0 }
+  to { --api-getter-decode-w: 1 }
+}
+
+@keyframes api-getter-decode-h {
+  from { --api-getter-decode-h: 0 }
+  to { --api-getter-decode-h: 1 }
+}
