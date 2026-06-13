@@ -7,11 +7,11 @@
 }
 
 [apitarget] {
-  animation-timeline: --api-width, --api-height;
   --api-getter-animation:
     api-getter-decode-w linear,
     api-getter-decode-h linear;
   animation: var(--api-getter-animation);
+  animation-timeline: --api-width, --api-height;
   animation-range: -1px;
 }
 
