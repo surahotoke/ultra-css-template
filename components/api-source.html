@@ -13,12 +13,8 @@
   scroll-timeline-axis: x, y;
 }
 
-:host([apiname^="--"])::before {
+:host([apiname^="--"][apiname*=","])::before {
   scroll-timeline-name: attr(apiname type(*));
-}
-
-:host([apiname^="--"]:not([apiname*=","]))::before {
-  scroll-timeline-axis: x;
 }
 
 </style>

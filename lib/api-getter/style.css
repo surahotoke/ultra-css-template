@@ -2,7 +2,7 @@
   timeline-scope: --api-width, --api-height;
 }
 
-[apiscope^="--"] {
+[apiscope^="--"][apiscope*=","] {
   timeline-scope: attr(apiscope type(*));
 }
 
@@ -13,22 +13,100 @@
   animation: var(--api-getter-animation);
   animation-timeline: --api-width, --api-height;
   animation-range: -1px;
+  --api-value: --api-value();
+  --api-status: --api-status();
+  --api-status-text: --api-status-text();
+  --api-ok: --api-ok();
 }
 
-[apitarget^="--"] {
+[apitarget^="--"][apitarget*=","] {
   animation-timeline: attr(apitarget type(*));
 }
 
-[apitarget^="--"]:not([apitarget*=","]) {
-  --api-getter-animation: api-getter-decode-w linear;
+@function --api-value() returns <integer> {
+  --w: round(down, 1 / var(--api-getter-decode-w) - 1);
+  --h: round(down, 1 / var(--api-getter-decode-h) - 1);
+  result: calc(316781 * round(down, var(--h) / 900) + var(--w));
 }
 
-@function --api-data(--s type(w | h)) returns <integer> {
+@function --api-status() returns <integer> {
+  --h: round(down, 1 / var(--api-getter-decode-h) - 1);
+  result: calc(mod(var(--h), 900) + 100);
+}
+
+@function --api-status-text(--status <integer>: var(--api-status)) returns <string> {
   result: if(
-    style(--s: w): round(down, 1 / var(--api-getter-decode-w) - 1);
-    style(--s: h): round(down, 1 / var(--api-getter-decode-h) - 1);
+    style(--status: 100): 'Continue';
+    style(--status: 101): 'Switching Protocols';
+    style(--status: 102): 'Processing';
+    style(--status: 103): 'Early Hints';
+    style(--status: 200): 'OK';
+    style(--status: 201): 'Created';
+    style(--status: 202): 'Accepted';
+    style(--status: 203): 'Non-Authoritative Information';
+    style(--status: 204): 'No Content';
+    style(--status: 205): 'Reset Content';
+    style(--status: 206): 'Partial Content';
+    style(--status: 207): 'Multi-Status';
+    style(--status: 208): 'Already Reported';
+    style(--status: 226): 'IM Used';
+    style(--status: 300): 'Multiple Choices';
+    style(--status: 301): 'Moved Permanently';
+    style(--status: 302): 'Found';
+    style(--status: 303): 'See Other';
+    style(--status: 304): 'Not Modified';
+    style(--status: 307): 'Temporary Redirect';
+    style(--status: 308): 'Permanent Redirect';
+    style(--status: 400): 'Bad Request';
+    style(--status: 401): 'Unauthorized';
+    style(--status: 402): 'Payment Required';
+    style(--status: 403): 'Forbidden';
+    style(--status: 404): 'Not Found';
+    style(--status: 405): 'Method Not Allowed';
+    style(--status: 406): 'Not Acceptable';
+    style(--status: 407): 'Proxy Authentication Required';
+    style(--status: 408): 'Request Timeout';
+    style(--status: 409): 'Conflict';
+    style(--status: 410): 'Gone';
+    style(--status: 411): 'Length Required';
+    style(--status: 412): 'Precondition Failed';
+    style(--status: 413): 'Content Too Large';
+    style(--status: 414): 'URI Too Long';
+    style(--status: 415): 'Unsupported Media Type';
+    style(--status: 416): 'Range Not Satisfiable';
+    style(--status: 417): 'Expectation Failed';
+    style(--status: 421): 'Misdirected Request';
+    style(--status: 422): 'Unprocessable Content';
+    style(--status: 423): 'Locked';
+    style(--status: 424): 'Failed Dependency';
+    style(--status: 425): 'Too Early';
+    style(--status: 426): 'Upgrade Required';
+    style(--status: 428): 'Precondition Required';
+    style(--status: 429): 'Too Many Requests';
+    style(--status: 431): 'Request Header Fields Too Large';
+    style(--status: 451): 'Unavailable For Legal Reasons';
+    style(--status: 500): 'Internal Server Error';
+    style(--status: 501): 'Not Implemented';
+    style(--status: 502): 'Bad Gateway';
+    style(--status: 503): 'Service Unavailable';
+    style(--status: 504): 'Gateway Timeout';
+    style(--status: 505): 'HTTP Version Not Supported';
+    style(--status: 506): 'Variant Also Negotiates';
+    style(--status: 507): 'Insufficient Storage';
+    style(--status: 508): 'Loop Detected';
+    style(--status: 511): 'Network Authentication Required';
+    else: --custom-status-text(var(--status));
   );
 }
+
+@function --api-ok(--value: 1, --fallback: 0, --status <integer>: var(--api-status)) {
+  result: if(
+    style(200 <= var(--status) < 300): var(--value);
+    else: var(--fallback);
+  );
+}
+
+@function --custom-status-text(--_) { result: '' }
 
 @keyframes api-getter-decode-w {
   from { --api-getter-decode-w: 0 }

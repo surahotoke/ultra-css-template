@@ -9,3 +9,27 @@
   inherits: false;
   initial-value: 1;
 }
+
+@property --api-value {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --api-status {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --api-status-text {
+  syntax: '<string>';
+  inherits: false;
+  initial-value: '';
+}
+
+@property --api-ok {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 0;
+}
