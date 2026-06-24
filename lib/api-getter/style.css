@@ -13,8 +13,16 @@
   animation: var(--api-getter-animation);
   animation-timeline: --api-width, --api-height;
   animation-range: -1px;
-  --api-value: --api-value();
-  --api-status: --api-status();
+  --api-value: calc(316781 * round(down,
+      round(down, 1 / var(--api-getter-decode-h) - 1) / 900
+    )
+    + round(down, 1 / var(--api-getter-decode-w) - 1)
+  );
+  --api-status: calc(mod(
+      round(down, 1 / var(--api-getter-decode-h) - 1),
+    900)
+    + 100
+  );
   --api-status-text: --api-status-text();
   --api-ok: --api-ok();
 }
@@ -24,17 +32,14 @@
 }
 
 @function --api-value() returns <integer> {
-  --w: round(down, 1 / var(--api-getter-decode-w) - 1);
-  --h: round(down, 1 / var(--api-getter-decode-h) - 1);
-  result: calc(316781 * round(down, var(--h) / 900) + var(--w));
+  result: var(--api-value);
 }
 
 @function --api-status() returns <integer> {
-  --h: round(down, 1 / var(--api-getter-decode-h) - 1);
-  result: calc(mod(var(--h), 900) + 100);
+  result: var(--api-status);
 }
 
-@function --api-status-text(--status <integer>: var(--api-status)) returns <string> {
+@function --api-status-text(--status <integer>: --api-status()) returns <string> {
   result: if(
     style(--status: 100): 'Continue';
     style(--status: 101): 'Switching Protocols';
@@ -99,7 +104,7 @@
   );
 }
 
-@function --api-ok(--value: 1, --fallback: 0, --status <integer>: var(--api-status)) {
+@function --api-ok(--value: 1, --fallback: 0, --status <integer>: --api-status()) {
   result: if(
     style(200 <= var(--status) < 300): var(--value);
     else: var(--fallback);

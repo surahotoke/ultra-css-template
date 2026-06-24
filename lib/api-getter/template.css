@@ -1,5 +1,5 @@
 /* 600 ≤ status ≤ 999 */
-@function --custom-status-text(--status <integer>: var(--api-status)) returns <string> {
+@function --custom-status-text(--status <integer>: --api-status()) returns <string> {
   result: if(
     style(--status: 600): 'Unknown';
     else: '';
