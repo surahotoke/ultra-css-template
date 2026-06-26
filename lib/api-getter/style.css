@@ -26,6 +26,11 @@
   animation-timeline: attr(apitarget type(*));
 }
 
+/*
+  w: 0 ≤ value ≤ 316780
+  h: 0 ≤ value ≤ 350
+  s: 0 ≤ value ≤ 999999
+*/
 @function --api-value(--axis type(w | h | s): s) returns <integer> {
   --w: round(1 / var(--api-getter-decode-w) - 1);
   --h: round(down, round(1 / var(--api-getter-decode-h) - 1) / 900);
