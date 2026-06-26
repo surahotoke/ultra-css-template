@@ -112,7 +112,7 @@
 
 @function --api-ok(--value: 1, --fallback: 0, --status <integer>: --api-status()) {
   result: if(
-    style(200 <= var(--status) < 300): var(--value);
+    style(199 <= var(--status) < 300): var(--value);
     else: var(--fallback);
   );
 }
