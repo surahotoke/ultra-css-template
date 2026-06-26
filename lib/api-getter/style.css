@@ -13,11 +13,6 @@
   animation: var(--api-getter-animation);
   animation-timeline: --api-width, --api-height;
   animation-range: -1px;
-  --api-value: calc(316781 * round(down,
-      round(down, 1 / var(--api-getter-decode-h) - 1) / 900
-    )
-    + round(down, 1 / var(--api-getter-decode-w) - 1)
-  );
   --api-status: calc(mod(
       round(down, 1 / var(--api-getter-decode-h) - 1),
     900)
@@ -31,8 +26,14 @@
   animation-timeline: attr(apitarget type(*));
 }
 
-@function --api-value() returns <integer> {
-  result: var(--api-value);
+@function --api-value(--axis type(w | h | s): s) returns <integer> {
+  --w: round(1 / var(--api-getter-decode-w) - 1);
+  --h: round(down, round(1 / var(--api-getter-decode-h) - 1) / 900);
+  result: if(
+    style(--axis: w): var(--w);
+    style(--axis: h): var(--h);
+    style(--axis: s): calc(var(--api-BASE) * var(--h) + var(--w));
+  );
 }
 
 @function --api-status() returns <integer> {
