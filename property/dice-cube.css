@@ -1,0 +1,10 @@
+@property --dice-cube-decode-x {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}
+@property --dice-cube-decode-y {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 1;
+}

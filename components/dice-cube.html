@@ -1,0 +1,131 @@
+<style>
+
+@import url(lib/column-generator/style.css);
+
+.dice {
+  --size: 240px;
+  width: var(--size);
+  height: var(--size);
+  --column-width: var(--size);
+  --column-height: var(--size);
+  --face-rate: .5;
+  --face-size: calc(var(--face-rate) * var(--size));
+  border: solid;
+  scroll-behavior: smooth;
+  scroll-snap-type: both mandatory;
+  animation:
+    var(--column-generator-animation),
+    decode-x linear,
+    decode-y linear;
+  animation-timeline: auto, auto, scroll(self x), scroll(self);
+  animation-composition: replace, add, replace, replace;
+  --decode-x: var(--dice-cube-decode-x);
+  --decode-y: var(--dice-cube-decode-y);
+}
+
+::scroll-marker-group {
+  border: solid;
+  display: grid;
+  place-items: center;
+  perspective: 800px;
+  perspective-origin: right top;
+  transform-style: preserve-3d;
+}
+
+::column {
+  scroll-snap-align: center;
+}
+
+::column::scroll-marker {
+  position: absolute;
+  box-shadow: inset 0 0 0 3px black;
+  border-radius: 2px;
+  backface-visibility: hidden;
+}
+
+::column::scroll-marker {
+  width: --role(face, var(--face-size), 0);
+  height: --role(face, var(--face-size), 0);
+  transform: --role(face,
+    rotateY(calc(var(--decode-x) * -1turn)) rotateX(calc(var(--decode-y) * 1turn))
+    if(
+      style(--class: xp): translateX(calc(var(--face-size) / 2)) rotateY(90deg);
+      style(--class: yn): translateY(calc(var(--face-size) / -2)) rotateX(90deg);
+      style(--class: zp): translateZ(calc(var(--face-size) / 2));
+      style(--class: xn): translateX(calc(var(--face-size) / -2)) rotateY(-90deg);
+      style(--class: yp): translateY(calc(var(--face-size) / 2)) rotateX(-90deg);
+      style(--class: zn): translateZ(calc(var(--face-size) / -2)) rotateY(180deg);
+    )
+  );
+  --r: calc(var(--face-size) * .1);
+  background: --role(face, if(
+    style(--class: yn):
+      --dot(50%, 50%, calc(var(--r) * 1.5), red);
+    style(--class: zp):
+      --dot(30%, 30%, var(--r)),
+      --dot(70%, 70%, var(--r));
+    style(--class: xp):
+      --dot(25%, 25%, var(--r)),
+      --dot(50%, 50%, var(--r)),
+      --dot(75%, 75%, var(--r));
+    style(--class: xn):
+      --dot(25%, 25%, var(--r)),
+      --dot(75%, 25%, var(--r)),
+      --dot(25%, 75%, var(--r)),
+      --dot(75%, 75%, var(--r));
+    style(--class: zn):
+      --dot(25%, 25%, var(--r)),
+      --dot(75%, 25%, var(--r)),
+      --dot(50%, 50%, var(--r)),
+      --dot(25%, 75%, var(--r)),
+      --dot(75%, 75%, var(--r));
+    style(--class: yp):
+      --dot(30%, 20%, var(--r)),
+      --dot(30%, 50%, var(--r)),
+      --dot(30%, 80%, var(--r)),
+      --dot(70%, 20%, var(--r)),
+      --dot(70%, 50%, var(--r)),
+      --dot(70%, 80%, var(--r));
+  ));
+}
+
+@function --to-class(--index <integer>) returns <custom-ident> {
+  result: if(
+    style(--index: 8): yn;
+    style(--index: 11): zn;
+    style(--index: 12): xp;
+    style(--index: 13): zp;
+    style(--index: 14): xn;
+    style(--index: 18): yp;
+  );
+}
+
+@function --to-role() returns <custom-ident> {
+  result: if(
+    style(
+      (--class: xp) or
+      (--class: yp) or
+      (--class: zp) or
+      (--class: xn) or
+      (--class: yn) or
+      (--class: zn)): face;
+  );
+}
+
+@function --dot(--x <length-percentage>, --y <length-percentage>, --r <length>, --color <color>: black) returns <image> {
+  result: radial-gradient(circle var(--r) at var(--x) var(--y), var(--color) 100%, transparent 0);
+}
+
+@keyframes decode-x {
+  from { --dice-cube-decode-x: 0 }
+  to { --dice-cube-decode-x: 1 }
+}
+
+@keyframes decode-y {
+  from { --dice-cube-decode-y: 0 }
+  to { --dice-cube-decode-y: 1 }
+}
+
+</style>
+
+<div class="dice" colcount="5" rowcount="5" mapping navigate></div>
