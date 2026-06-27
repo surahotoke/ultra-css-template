@@ -1,0 +1,52 @@
+<style>
+
+@import url(lib/column-generator/style.css);
+
+.render {
+  --f_s: --column-count();
+  animation: time 3s linear infinite;
+  --t: var(--function-render-t);
+}
+
+::scroll-marker-group {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 500px;
+  height: 200px;
+  overflow: hidden;
+  outline: solid;
+}
+
+::column::scroll-marker {
+  --x: --function-render-get-x();
+  display: flex;
+  width: calc(500px / var(--f_s));
+  height: abs(--f());
+  transform-origin: bottom;
+  translate: 0 -50%;
+  rotate: calc(0.25turn * (1 - sign(--f())));
+  --background: if(
+    style(rem(round(var(--f_s) * var(--x)), 2) = 0): #0f08;
+    else: #0074;
+  );
+  background: var(--background);
+  border-top: solid;
+}
+
+@function --f() returns <length> {
+  --xt: calc(var(--x) + var(--t));
+  result: calc(50px * sin(3turn * var(--xt)) + 30px * cos(7turn * var(--xt)));
+}
+
+@function --function-render-get-x() returns <number> {
+  result: calc(var(--column-position-x) / 100% - 0.5);
+}
+
+@keyframes time {
+  to { --function-render-t: 1 }
+}
+
+</style>
+
+<div class="render" columns="200" selfmapping></div>

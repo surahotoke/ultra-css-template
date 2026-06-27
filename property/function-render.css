@@ -1,0 +1,5 @@
+@property --function-render-t {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
