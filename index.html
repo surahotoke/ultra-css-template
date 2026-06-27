@@ -9,13 +9,13 @@
   <link rel="stylesheet" href="style.css">
   <template define="api-source" page="components/api-source.html"></template>
   <template define="column-generator-demo" page="components/column-generator-demo.html"></template>
-  <template define="current-time" page="components/current-time.html"></template>
+  <template define="digital-clock" page="components/digital-clock.html"></template>
   <template define="macbook-keyboard" page="components/macbook-keyboard.html"></template>
 </head>
 <body onload="(async()=>{r=_=>e.attributes.removeNamedItem(_).value;while((p=(d=document)[q='querySelectorAll']`[page]`)[0])await Promise.all([...p].map(async _=>(e=_).innerHTML=await(await fetch(r`page`)).text()));c=_=>{for(e of[..._[q]`[count]`].reverse())for(_=r`count`;--_>0;)e.after(e.cloneNode``)};c(d);d[q]`template[define]`.forEach(_=>customElements.define(_.getAttribute`define`,class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(_.cloneNode``)},c(_=_.content)))})()">
   <iframe height="24" srcdoc="<meta http-equiv='refresh' content='5'><body style='margin: 0;overflow: hidden'><img src='https://css-api.surahotoke.workers.dev/heartbeat'></body>"></iframe>
   <column-generator-demo></column-generator-demo>
-  <current-time></current-time>
+  <digital-clock></digital-clock>
   <macbook-keyboard></macbook-keyboard>
 </body>
 </html>

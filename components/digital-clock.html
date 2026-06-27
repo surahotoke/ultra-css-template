@@ -2,7 +2,7 @@
 
 @import url(lib/api-getter/style.css);
 
-.time {
+.clock {
   counter-reset:
     hour --get-time(h)
     minute --get-time(m)
@@ -26,6 +26,6 @@
 </style>
 
 <div class="container" apiscope>
-  <api-source style="--api: url(https://css-api.surahotoke.workers.dev/info/time/current)"></api-source>
-  <div class="time" apitarget></div>
+  <api-source style="--api: url(https://css-api.surahotoke.workers.dev/info/datetime/clock)"></api-source>
+  <div class="clock" apitarget></div>
 </div>
