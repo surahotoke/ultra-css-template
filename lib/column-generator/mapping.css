@@ -75,6 +75,8 @@
   );
 }
 
+@function --to-element() { result: div }
+
 @keyframes column-generator-init {
   to { --column-generator-column-i: var(--n) }
 }
