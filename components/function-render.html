@@ -25,7 +25,7 @@
   height: abs(--f());
   transform-origin: bottom;
   translate: 0 -50%;
-  rotate: calc(0.25turn * (1 - sign(--f())));
+  rotate: calc(.25turn * (1 - sign(--f())));
   --background: if(
     style(rem(round(var(--f_s) * var(--x)), 2) = 0): #0f08;
     else: #0074;
@@ -40,7 +40,7 @@
 }
 
 @function --function-render-get-x() returns <number> {
-  result: calc(var(--column-position-x) / 100% - 0.5);
+  result: calc(var(--column-position-x) / 100% - .5);
 }
 
 @keyframes time {
