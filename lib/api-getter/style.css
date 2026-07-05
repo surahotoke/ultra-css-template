@@ -26,7 +26,7 @@
   animation-timeline: attr(apitarget type(*));
 }
 
-/*
+/**
   w: 0 ≤ value ≤ 316780
   h: 0 ≤ value ≤ 350
   s: 0 ≤ value ≤ 999999
