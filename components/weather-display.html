@@ -1,0 +1,91 @@
+<style>
+
+@import url(lib/api-getter/style.css);
+
+.temp {
+  --temperature: --api-ok(round(--api-value() / 10 - 273.15));
+  counter-reset: temp var(--temperature);
+}
+
+.apparent {
+  --apparent-temperature: --api-ok(round(--api-value() / 10 - 273.15));
+  --temperature-diff: calc(var(--apparent-temperature) - var(--temperature));
+  counter-reset:
+    temp-diff var(--temperature-diff);
+  &::after {
+    content: '温度：' counter(temp) '℃' if(
+      style(--temperature-diff: 0): '';
+      else: ' ' counter(temp-diff, decimal-abs) if(
+        style(var(--temperature-diff) > 0): '℃暑く感じる';
+        else: '℃涼しく感じる';
+      );
+    );
+  }
+}
+
+.weather {
+  --weather-code: --api-ok(--api-value(), -1);
+  --weather: --weather-code-to-text(var(--weather-code));
+  &::after {
+    content: var(--weather);
+    color: if(
+      style(0 <= var(--weather-code) < 2): skyblue;
+      style(2 <= var(--weather-code) < 49): lightgray;
+      style(51 <= var(--weather-code) < 68): slategray;
+      style(71 <= var(--weather-code) < 78): snow;
+      style(80 <= var(--weather-code) < 83): slategray;
+      style(85 <= var(--weather-code) < 87): snow;
+      style(95 <= var(--weather-code) < 100): gold;
+    );
+    text-shadow: 0 0 1px contrast-color(currentColor);
+  }
+}
+
+@function --weather-code-to-text(--code <integer>) returns <string> {
+  result: if(
+    style(--code: 0): '快晴';
+    style(--code: 1): 'ほぼ晴れ';
+    style(--code: 2): '薄曇';
+    style(--code: 3): '曇り';
+    style(--code: 45): '霧';
+    style(--code: 48): '着氷霧';
+    style(--code: 51): '軽い霧雨';
+    style(--code: 53): '霧雨';
+    style(--code: 55): '密な霧雨';
+    style(--code: 56): '軽い着氷性霧雨';
+    style(--code: 57): '密な着氷性霧雨';
+    style(--code: 61): '小雨';
+    style(--code: 63): '雨';
+    style(--code: 65): '大雨';
+    style(--code: 66): '着氷性雨';
+    style(--code: 67): '強い着氷性雨';
+    style(--code: 71): '小雪';
+    style(--code: 73): '雪';
+    style(--code: 75): '大雪';
+    style(--code: 77): '雪粒';
+    style(--code: 80): 'にわか雨';
+    style(--code: 81): 'にわか雨';
+    style(--code: 82): '激しいにわか雨';
+    style(--code: 85): 'にわか雪';
+    style(--code: 86): '激しいにわか雪';
+    style(--code: 95): '雷雨';
+    style(--code: 96): '雹を伴う雷雨';
+    style(--code: 99): '大雹を伴う雷雨';
+    else: '不明';
+  );
+}
+
+</style>
+
+<div apiscope="--temp-w, --temp-h, --apparent-w, --apparent-h, --weather-w, --weather-h">
+  <api-source apiname="--temp-w, --temp-h"
+    style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/temperature)"></api-source>
+  <api-source apiname="--apparent-w, --apparent-h"
+    style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/apparent-temperature)"></api-source>
+  <api-source apiname="--weather-w, --weather-h"
+    style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/weather-code)"></api-source>
+  <div class="temp" apitarget="--temp-w, --temp-h">
+    <div class="apparent" apitarget="--apparent-w, --apparent-h"></div>
+  </div>
+  <div class="weather" apitarget="--weather-w, --weather-h"></div>
+</div>

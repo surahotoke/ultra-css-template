@@ -20,6 +20,11 @@
   );
 }
 
+@counter-style decimal-abs {
+  system: extends decimal;
+  negative: '';
+}
+
 @counter-style -none {
   system: cyclic;
   symbols: '';
