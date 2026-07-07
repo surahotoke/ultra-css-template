@@ -1,3 +1,7 @@
+:root {
+  color-scheme: light dark;
+}
+
 @view-transition {
   navigation: auto;
 }
