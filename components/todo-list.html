@@ -30,9 +30,9 @@ select,
 }
 
 @scope(option) {
-  background: white;
-  :scope:hover { filter: brightness(.9) }
-  :scope:checked { filter: brightness(.8) }
+  background: light-dark(oklch(98.5% .003 90), oklch(27% .015 265));
+  :scope:hover { background: light-dark(oklch(93% .01 265), oklch(34% .02 265)) }
+  :scope:checked { background: light-dark(oklch(88% .03 265), oklch(41% .04 265)) }
   :scope::checkmark {
     content: '→';
   }

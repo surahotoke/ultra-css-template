@@ -8,7 +8,7 @@ div {
   width: 100px;
   height: 100px;
   padding: 100px;
-  border: solid;
+  border: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
   --column-width: 62px;
   --column-height: 66px;
   --column-gap: 200px;
@@ -16,7 +16,7 @@ div {
 }
 
 ::after {
-  background: red;
+  background: light-dark(oklch(85% .08 35), oklch(45% .1 35));
 }
 
 ::column {
@@ -25,7 +25,7 @@ div {
 
 ::column::scroll-marker {
   content: counter(column-index);
-  background: green;
+  background: light-dark(oklch(78% .1 155), oklch(42% .09 155));
   width: calc(--column-index() * 5px);
 }
 

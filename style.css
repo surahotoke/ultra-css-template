@@ -3,8 +3,8 @@
 }
 
 body {
-  background-color: light-dark(white, black);
-  color: light-dark(black, white);
+  background-color: light-dark(oklch(97% .005 90), oklch(21% .015 265));
+  color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
 }
 
 @view-transition {

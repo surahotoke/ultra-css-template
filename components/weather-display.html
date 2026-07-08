@@ -29,13 +29,13 @@
   &::after {
     content: var(--weather);
     color: if(
-      style(0 <= var(--weather-code) < 2): skyblue;
-      style(2 <= var(--weather-code) < 49): lightgray;
-      style(51 <= var(--weather-code) < 68): slategray;
-      style(71 <= var(--weather-code) < 78): snow;
-      style(80 <= var(--weather-code) < 83): slategray;
-      style(85 <= var(--weather-code) < 87): snow;
-      style(95 <= var(--weather-code) < 100): gold;
+      style(0 <= var(--weather-code) < 2): light-dark(oklch(55% .13 245), oklch(80% .1 235));
+      style(2 <= var(--weather-code) < 49): light-dark(oklch(55% .015 265), oklch(78% .015 265));
+      style(51 <= var(--weather-code) < 68): light-dark(oklch(46% .05 255), oklch(72% .06 250));
+      style(71 <= var(--weather-code) < 78): light-dark(oklch(70% .02 240), oklch(95% .008 240));
+      style(80 <= var(--weather-code) < 83): light-dark(oklch(46% .05 255), oklch(72% .06 250));
+      style(85 <= var(--weather-code) < 87): light-dark(oklch(70% .02 240), oklch(95% .008 240));
+      style(95 <= var(--weather-code) < 100): light-dark(oklch(60% .14 92), oklch(84% .15 95));
     );
     text-shadow: 0 0 1px contrast-color(currentColor);
   }

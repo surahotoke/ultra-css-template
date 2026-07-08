@@ -3,14 +3,14 @@
 @import url(lib/duplicator-layout/style.css);
 
 :host {
-  background: papayawhip;
+  background: light-dark(oklch(93.5% .012 90), oklch(27% .018 265));
   display: none;
   align-items: center;
   gap: 4px;
   width: stretch;
   max-width: 500px;
   padding: 4px;
-  border: solid;
+  border: solid light-dark(oklch(80% .015 90), oklch(40% .02 265));
   border-radius: 12px;
 }
 
@@ -40,10 +40,10 @@
 }
 
 @scope(.done-button) {
-  background: darkseagreen;
+  background: light-dark(oklch(84% .07 155), oklch(45% .09 155));
   width: 24px;
   aspect-ratio: 1;
-  border: solid 2px;
+  border: solid 2px light-dark(oklch(60% .09 155), oklch(65% .1 155));
   border-radius: 8px;
   display: grid;
   place-content: center;
@@ -63,17 +63,17 @@
   field-sizing: content;
   :scope::placeholder {
     color: transparent;
-    background: text linear-gradient(to right in oklch longer hue, red, red);
-    opacity: .3;
+    background: text linear-gradient(to right in oklch longer hue, oklch(62% .16 30), oklch(62% .16 29));
+    opacity: light-dark(.35, .5);
   }
 }
 
 @scope(.delete-button) {
-  background: salmon;
-  color: dimgray;
+  background: light-dark(oklch(88% .04 35), oklch(38% .06 35));
+  color: light-dark(oklch(45% .09 35), oklch(80% .06 35));
   width: 24px;
   aspect-ratio: 1;
-  border: solid 2px;
+  border: solid 2px light-dark(oklch(65% .1 35), oklch(58% .12 35));
   border-radius: 4px;
   display: grid;
   place-content: center;
@@ -81,7 +81,7 @@
   :scope::before {
     content: 'x';
   }
-  :scope:hover { background: red }
+  :scope:hover { background: oklch(56% .19 30) }
   :scope:checked::before {
     content: '←';
   }

@@ -38,7 +38,7 @@
 
 ::column::scroll-marker {
   position: absolute;
-  box-shadow: inset 0 0 0 3px black;
+  box-shadow: inset 0 0 0 3px light-dark(oklch(25% .02 265), oklch(30% .03 265));
   border-radius: 2px;
   backface-visibility: hidden;
 }
@@ -60,7 +60,7 @@
   --r: calc(var(--face-size) * .1);
   background: --role(face, if(
     style(--class: yn):
-      --dot(50%, 50%, calc(var(--r) * 1.5), red);
+      --dot(50%, 50%, calc(var(--r) * 1.5), oklch(50% .19 29));
     style(--class: zp):
       --dot(30%, 30%, var(--r)),
       --dot(70%, 70%, var(--r));
@@ -87,6 +87,7 @@
       --dot(70%, 50%, var(--r)),
       --dot(70%, 80%, var(--r));
   ));
+  background-color: --role(face, light-dark(oklch(97% .008 95), oklch(85% .015 95)), transparent);
 }
 
 @function --to-class(--index <integer>) returns <custom-ident> {

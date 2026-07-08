@@ -15,7 +15,7 @@
   width: 500px;
   height: 200px;
   overflow: hidden;
-  outline: solid;
+  outline: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
 }
 
 ::column::scroll-marker {
@@ -27,11 +27,11 @@
   translate: 0 -50%;
   rotate: calc(.25turn * (1 - sign(--f())));
   --background: if(
-    style(rem(round(var(--f_s) * var(--x)), 2) = 0): #0f08;
-    else: #0074;
+    style(rem(round(var(--f_s) * var(--x)), 2) = 0): light-dark(oklch(58% .15 155 / .6), oklch(72% .15 155 / .55));
+    else: light-dark(oklch(46% .13 265 / .55), oklch(60% .12 265 / .5));
   );
   background: var(--background);
-  border-top: solid;
+  border-top: solid light-dark(oklch(30% .02 265), oklch(85% .01 90));
 }
 
 @function --f() returns <length> {
