@@ -1,0 +1,101 @@
+<style>
+
+@import url(lib/duplicator-layout/style.css);
+
+:host {
+  background: papayawhip;
+  display: none;
+  align-items: center;
+  gap: 4px;
+  width: stretch;
+  max-width: 500px;
+  padding: 4px;
+  border: solid;
+  border-radius: 12px;
+}
+
+:host {
+  display: if(
+    style((--filter: all) or (--filter: pending)): flex;
+    else: none;
+  );
+}
+
+:host:has(.done-button:checked) {
+  display: if(
+    style((--filter: all) or (--filter: done)): flex;
+    else: none;
+  );
+}
+
+:host:has(.delete-button:checked) {
+  display: if(
+    style(--filter: deleted): flex;
+    else: none;
+  );
+}
+
+[type="checkbox"] {
+  appearance: none;
+}
+
+@scope(.done-button) {
+  background: darkseagreen;
+  width: 24px;
+  aspect-ratio: 1;
+  border: solid 2px;
+  border-radius: 8px;
+  display: grid;
+  place-content: center;
+  :scope::before {
+    content: '😃';
+    opacity: 0;
+  }
+  :scope:hover { filter: brightness(1.2) }
+  :scope:hover::before { opacity: .2 }
+  :scope:checked::before { opacity: 1 }
+}
+
+@scope(.title) {
+  resize: none;
+  flex: 1;
+  max-width: 300px;
+  field-sizing: content;
+  :scope::placeholder {
+    color: transparent;
+    background: text linear-gradient(to right in oklch longer hue, red, red);
+    opacity: .3;
+  }
+}
+
+@scope(.delete-button) {
+  background: salmon;
+  color: dimgray;
+  width: 24px;
+  aspect-ratio: 1;
+  border: solid 2px;
+  border-radius: 4px;
+  display: grid;
+  place-content: center;
+  transition: .4s;
+  :scope::before {
+    content: 'x';
+  }
+  :scope:hover { background: red }
+  :scope:checked::before {
+    content: '←';
+  }
+}
+
+</style>
+
+<div duplicatorlayout>
+  <p>
+    この領域にカーソルを入れて、enterキーで追加できるよ！
+    <duplicator-slot><slot></slot></duplicator-slot>
+  </p>
+</div>
+
+<input type="checkbox" class="done-button">
+<textarea class="title" placeholder="タスクを入力..."></textarea>
+<input type="checkbox" class="delete-button">

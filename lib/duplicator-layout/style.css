@@ -1,0 +1,6 @@
+[duplicatorlayout] {
+  :host(:last-of-type) > :not(&),
+  :host(:not(:last-of-type)) > & {
+    display: none !important;
+  }
+}

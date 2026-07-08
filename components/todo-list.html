@@ -1,0 +1,72 @@
+<style>
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+@scope(selectedcontent) {
+  .icon {
+    display: none;
+  }
+}
+
+::picker-icon {
+  scale: .9 1.3;
+  transition: 150ms;
+}
+
+:open::picker-icon { rotate: 90deg }
+
+::picker(select) {
+  transition: .3s allow-discrete;
+  transform-origin: top right;
+  scale: 0;
+}
+
+::picker(select):popover-open {
+  scale: 1;
+  @starting-style { scale: 1 0 }
+}
+
+@scope(option) {
+  background: white;
+  :scope:hover { filter: brightness(.9) }
+  :scope:checked { filter: brightness(.8) }
+  :scope::checkmark {
+    content: '→';
+  }
+}
+
+slot {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 4px;
+}
+
+:host:has(.all:checked) { --filter: all }
+:host:has(.done:checked) { --filter: done }
+:host:has(.pending:checked) { --filter: pending }
+:host:has(.deleted:checked) { --filter: deleted }
+
+</style>
+
+<h1>TODO リスト</h1>
+<select>
+  <button>
+    フィルター：<selectedcontent></selectedcontent>
+  </button>
+  <option class="all">
+    <span class="icon">📋</span>一覧
+  </option>
+  <option class="done">
+    <span class="icon">✅</span>完了済み
+  </option>
+  <option class="pending">
+    <span class="icon">⏳</span>未完了
+  </option>
+  <option class="deleted">
+    <span class="icon">🗑️</span>削除済み
+  </option>
+</select>
+<slot></slot>

@@ -11,8 +11,11 @@
   <template define="column-generator-demo" page="components/column-generator-demo.html"></template>
   <template define="dice-cube" page="components/dice-cube.html"></template>
   <template define="digital-clock" page="components/digital-clock.html"></template>
+  <template define="duplicator-slot" page="components/duplicator-slot.html"></template>
   <template define="function-render" page="components/function-render.html"></template>
   <template define="macbook-keyboard" page="components/macbook-keyboard.html"></template>
+  <template define="todo-item" page="components/todo-item.html"></template>
+  <template define="todo-list" page="components/todo-list.html"></template>
   <template define="weather-display" page="components/weather-display.html"></template>
 </head>
 <body onload="(async()=>{r=_=>e.attributes.removeNamedItem(_).value;while((p=(d=document)[q='querySelectorAll']`[page]`)[0])await Promise.all([...p].map(async _=>(e=_).innerHTML=await(await fetch(r`page`)).text()));c=_=>{for(e of[..._[q]`[count]`].reverse())for(_=r`count`;--_>0;)e.after(e.cloneNode``)};c(d);d[q]`template[define]`.forEach(_=>customElements.define(_.getAttribute`define`,class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(_.cloneNode``)},c(_=_.content)))})()">
@@ -20,6 +23,10 @@
   <iframe height="24" srcdoc="<meta http-equiv='refresh' content='5'><body style='margin: 0;overflow: clip'><img src='https://css-api.surahotoke.workers.dev/heartbeat'></body>"></iframe>
   <weather-display></weather-display>
   <column-generator-demo></column-generator-demo>
+  <todo-list contenteditable>
+    <todo-item count="3"></todo-item>
+    <todo-item> </todo-item>
+  </todo-list>
   <digital-clock></digital-clock>
   <macbook-keyboard></macbook-keyboard>
   <dice-cube></dice-cube>

@@ -1,0 +1,52 @@
+<style>
+
+:host {
+  background: contrast-color(currentColor);
+  width: 24px;
+  height: 24px;
+  display: inline grid;
+  border: solid;
+  border-radius: 8px;
+  grid: '_';
+  overflow: hidden;
+  container-type: size scroll-state;
+}
+
+.overlay {
+  color: inherit;
+  background: currentColor;
+  border: none;
+  grid-area: _;
+  order: 1;
+  margin-left: 100cqw;
+}
+
+.pre {
+  grid-area: _;
+  white-space: pre;
+  letter-spacing: 200cqw;
+  line-height: 100cqh;
+  caret-animation: manual;
+}
+
+.overlay {
+  transition: .5s step-end;
+  :host(:active) > & {
+    transition: none;
+    margin: 0;
+  }
+}
+
+.overlay:active {
+  + .pre { user-select: none }
+  &:hover + .pre { letter-spacing: -1ic }
+}
+
+@container scroll-state(scrollable: left) {
+  slot { user-select: none }
+}
+
+</style>
+
+<button class="overlay"></button>
+<div class="pre"><slot></slot></div>
