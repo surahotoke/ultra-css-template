@@ -14,6 +14,10 @@
   border-radius: 12px;
 }
 
+:host(:last-of-type) {
+  display: flex;
+}
+
 :host {
   display: if(
     style((--filter: all) or (--filter: pending)): flex;
