@@ -113,7 +113,7 @@
   );
 }
 
-@function --dot(--x <length-percentage>, --y <length-percentage>, --r <length>, --color <color>: black) returns <image> {
+@function --dot(--x <length-percentage>, --y <length-percentage>, --r <length>, --color <color>: oklch(28% .02 265)) returns <image> {
   result: radial-gradient(circle var(--r) at var(--x) var(--y), var(--color) 100%, transparent 0);
 }
 
