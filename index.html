@@ -20,6 +20,7 @@
 </head>
 <body onload="(async()=>{r=_=>e.attributes.removeNamedItem(_).value;while((p=(d=document)[q='querySelectorAll']`[page]`)[0])await Promise.all([...p].map(async _=>(e=_).innerHTML=await(await fetch(r`page`)).text()));c=_=>{for(e of[..._[q]`[count]`].reverse())for(_=r`count`;--_>0;)e.after(e.cloneNode``)};c(d);d[q]`template[define]`.forEach(_=>customElements.define(_.getAttribute`define`,class extends HTMLElement{_=this.attachShadow({mode:'open'}).append(_.cloneNode``)},c(_=_.content)))})()">
 
+  <iframe width="500" height="500" src="/embeds/comment/"></iframe><br>
   <iframe height="24" srcdoc="<meta http-equiv='refresh' content='5'><body style='margin: 0;overflow: clip'><img src='https://css-api.surahotoke.workers.dev/heartbeat'></body>"></iframe>
   <weather-display></weather-display>
   <column-generator-demo></column-generator-demo>

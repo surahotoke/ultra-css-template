@@ -1,0 +1,52 @@
+.rename-form {
+  background: inherit;
+  padding: 0;
+  border: none;
+  margin: 0;
+  position-anchor: --name;
+  left: anchor(right);
+  align-self: anchor-center;
+}
+
+.rename {
+  field-sizing: content;
+}
+
+.wrapper {
+  width: fit-content;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+@scope(.name-row) {
+  display: flex;
+  align-items: center;
+  :scope::before {
+    content: '名前：';
+    anchor-name: --name;
+  }
+  > img { height: 1em }
+  body:has(:popover-open) :scope * { visibility: hidden }
+}
+
+@scope(.comment-row) {
+  display: flex;
+  :scope::before { content: 'コメント：' }
+  > .comment {
+    resize: none;
+    field-sizing: content;
+    flex: 1;
+    width: min-content;
+    overflow-wrap: anywhere;
+    font-family: system-ui, sans-serif;
+  }
+}
+
+.comment-submit-button {
+  align-self: end;
+}
