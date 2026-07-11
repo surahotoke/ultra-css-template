@@ -37,7 +37,10 @@ body,
     content: '名前：';
     anchor-name: --name;
   }
-  > img { height: 1em }
+  > img {
+    max-width: 70vw;
+    height: 1em;
+  }
   body:has(:popover-open) :scope * { visibility: hidden }
 }
 
