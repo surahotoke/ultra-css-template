@@ -1,5 +1,6 @@
 :root {
   color-scheme: light dark;
+  --DEFAULT_MONOSPACE: Menlo, Consolas, monospace;
 }
 
 body {
