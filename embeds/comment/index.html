@@ -11,7 +11,8 @@
   <form id="rename-form" class="rename-form" action="/post/comment/rename" method="post" popover="manual">
     <button disabled hidden></button>
     <input name="rename" class="rename" placeholder="更新したい名前…"
-      required pattern="[\p{L}\p{N}\p{M}・._\-]{1,24}" title="24文字以内(使える記号: ・ . _ -)"
+      required maxlength="40" pattern="[\p{L}\p{N}\p{M}・._\-]{1,24}"
+      title="24文字以内(使える記号: ・ . _ -)"
       autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
     <button type="button" popovertarget="rename-form">キャンセル</button>
     <button>更新</button>
@@ -29,7 +30,7 @@
       </div>
       <button class="comment-submit-button">コメント送信</button>
     </form>
-    <iframe srcdoc="<meta http-equiv='refresh' content='10'><body style='margin:0'><img src='/view/comment/list'></body>"></iframe>
+    <iframe class="comment-list" srcdoc="<meta http-equiv='refresh' content='10'><body style='margin:0'><img style='width: stretch' src='/view/comment/list'></body>"></iframe>
   </div>
 </body>
 </html>

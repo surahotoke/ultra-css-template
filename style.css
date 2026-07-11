@@ -7,6 +7,11 @@ body {
   color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
 }
 
+.comment {
+  display: block;
+  margin-inline: auto;
+}
+
 @view-transition {
   navigation: auto;
 }
