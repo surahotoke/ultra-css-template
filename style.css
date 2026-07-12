@@ -8,6 +8,11 @@ body {
   color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
 }
 
+header {
+  display: flex;
+  gap: 4px;
+}
+
 header > a { color: inherit }
 
 .comment {

@@ -1,0 +1,31 @@
+<style>
+
+:host {
+  display: block;
+  width: 100px;
+  height: 60px;
+  timeline-trigger: --offset-colorful-css view();
+}
+div {
+  --offset-random: --random(sibling-index(), var(--offset-colorful-css-distance));
+  background: oklch(from red l c calc(h + mod(var(--offset-random), 150)));
+  position: absolute;
+  width: 1.6px;
+  height: 1.2px;
+  border-top-right-radius: 1px;
+  border-bottom-right-radius: 1px;
+  corner-shape: bevel;
+  offset: path('M6 5C6 1 2 1 2 6 2 11 6 11 6 7M12 4C12 0 5 2 10 6 15 10 8 12 8 8M18 4C18 0 11 2 16 6 21 10 14 12 14 8');
+  zoom: 5;
+  offset-distance: mod(1% * var(--offset-random), 100%);
+  animation: offset-colorful-css-appear 3s linear both;
+  animation-trigger: --offset-colorful-css play-forwards;
+}
+
+@keyframes offset-colorful-css-appear {
+  to { --offset-colorful-css-distance: 1 }
+}
+
+</style>
+
+<div count="10"></div>
