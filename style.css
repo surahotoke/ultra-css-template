@@ -8,11 +8,58 @@ body {
   color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
 }
 
+header > a { color: inherit }
+
 .comment {
   display: block;
   margin-inline: auto;
 }
 
+body > * {
+  view-transition-name: match-element;
+  view-transition-class: children;
+}
+
+::view-transition-image-pair(.children) {
+  display: block;
+  width: stretch;
+  perspective: 1000px;
+}
+
+::view-transition-old(.children) {
+  transform-origin: left;
+  animation: old linear 1s;
+}
+
+::view-transition-new(.children) {
+  animation: new 1s;
+}
+
 @view-transition {
   navigation: auto;
+}
+
+@keyframes old {
+  from { opacity: 1 }
+  90%,
+  to { opacity: 0 }
+  20% {
+    transform: rotateY(60deg) rotateX(.3turn);
+    translate: 200px;
+  }
+  60% {
+    transform: rotateY(0) rotateX(.6turn);
+    translate: 1000px 0 -800px;
+  }
+  to {
+    transform: rotateY(-30deg) rotateX(.8turn);
+    translate: 1600px 0 -500px;
+  }
+}
+
+@keyframes new {
+  from { translate: 100% }
+  from,
+  30% { opacity: 0 }
+  to { opacity: 1 }
 }
