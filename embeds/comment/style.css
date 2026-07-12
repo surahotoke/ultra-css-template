@@ -4,6 +4,10 @@ body,
   height: stretch;
 }
 
+html {
+  background: oklch(97% .005 90);
+}
+
 .rename-form {
   background: inherit;
   padding: 0;
