@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="text-scale" content="scale">
+  <title>ultra-css template</title>
+  <link rel="stylesheet" href="utility.css">
+  <link rel="stylesheet" href="property/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <offset-colorful-css>
+      <template shadowrootmode="open">
+        <style>
+          :host {
+            display: block;
+            width: 100px;
+            height: 60px;
+            timeline-trigger: --offset-colorful-css view();
+          }
+          div {
+            --offset-random: --random(sibling-index(), var(--offset-colorful-css-distance));
+            background: oklch(from red l c calc(h + mod(var(--offset-random), 150)));
+            position: absolute;
+            width: 1.6px;
+            height: 1.2px;
+            border-top-right-radius: 1px;
+            border-bottom-right-radius: 1px;
+            corner-shape: bevel;
+            offset: path('M6 5C6 1 2 1 2 6 2 11 6 11 6 7M12 4C12 0 5 2 10 6 15 10 8 12 8 8M18 4C18 0 11 2 16 6 21 10 14 12 14 8');
+            zoom: 5;
+            offset-distance: mod(1% * var(--offset-random), 100%);
+            animation: offset-colorful-css-appear 3s linear both;
+            animation-trigger: --offset-colorful-css play-forwards;
+          }
+          @keyframes offset-colorful-css-appear {
+            to { --offset-colorful-css-distance: 1 }
+          }
+        </style>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </template>
+    </offset-colorful-css>
+    <a href="no-js.html"><h1>ultra-css-template</h1></a>
+  </header>
+  <iframe height="24" srcdoc="<meta http-equiv='refresh' content='5'><img style='position: absolute;top: 4px' src='https://css-api.surahotoke.workers.dev/heartbeat'>"></iframe>
+  <weather-display>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/api-getter/style.css);
+        .temp {
+          --temperature: --api-ok(round(--api-value() / 10 - 273.15));
+          counter-reset: temp var(--temperature);
+        }
+        .apparent {
+          --apparent-temperature: --api-ok(round(--api-value() / 10 - 273.15));
+          --temperature-diff: calc(var(--apparent-temperature) - var(--temperature));
+          counter-reset:
+            temp-diff var(--temperature-diff);
+          &::after {
+            content: '温度：' counter(temp) '℃' if(
+              style(--temperature-diff: 0): '';
+              else: ' ' counter(temp-diff, decimal-abs) if(
+                style(var(--temperature-diff) > 0): '℃暑く感じる';
+                else: '℃涼しく感じる';
+              );
+            );
+          }
+        }
+        .weather {
+          --weather-code: --api-ok(--api-value(), -1);
+          --weather: --weather-code-to-text(var(--weather-code));
+          &::after {
+            content: var(--weather);
+            color: if(
+              style(0 <= var(--weather-code) < 2): light-dark(oklch(55% .13 245), oklch(80% .1 235));
+              style(2 <= var(--weather-code) < 49): light-dark(oklch(55% .015 265), oklch(78% .015 265));
+              style(51 <= var(--weather-code) < 68): light-dark(oklch(46% .05 255), oklch(72% .06 250));
+              style(71 <= var(--weather-code) < 78): light-dark(oklch(70% .02 240), oklch(95% .008 240));
+              style(80 <= var(--weather-code) < 83): light-dark(oklch(46% .05 255), oklch(72% .06 250));
+              style(85 <= var(--weather-code) < 87): light-dark(oklch(70% .02 240), oklch(95% .008 240));
+              style(95 <= var(--weather-code) < 100): light-dark(oklch(60% .14 92), oklch(84% .15 95));
+            );
+            text-shadow: 0 0 1px contrast-color(currentColor);
+          }
+        }
+        @function --weather-code-to-text(--code <integer>) returns <string> {
+          result: if(
+            style(--code: 0): '快晴';
+            style(--code: 1): 'ほぼ晴れ';
+            style(--code: 2): '薄曇';
+            style(--code: 3): '曇り';
+            style(--code: 45): '霧';
+            style(--code: 48): '着氷霧';
+            style(--code: 51): '軽い霧雨';
+            style(--code: 53): '霧雨';
+            style(--code: 55): '密な霧雨';
+            style(--code: 56): '軽い着氷性霧雨';
+            style(--code: 57): '密な着氷性霧雨';
+            style(--code: 61): '小雨';
+            style(--code: 63): '雨';
+            style(--code: 65): '大雨';
+            style(--code: 66): '着氷性雨';
+            style(--code: 67): '強い着氷性雨';
+            style(--code: 71): '小雪';
+            style(--code: 73): '雪';
+            style(--code: 75): '大雪';
+            style(--code: 77): '雪粒';
+            style(--code: 80): 'にわか雨';
+            style(--code: 81): 'にわか雨';
+            style(--code: 82): '激しいにわか雨';
+            style(--code: 85): 'にわか雪';
+            style(--code: 86): '激しいにわか雪';
+            style(--code: 95): '雷雨';
+            style(--code: 96): '雹を伴う雷雨';
+            style(--code: 99): '大雹を伴う雷雨';
+            else: '不明';
+          );
+        }
+      </style>
+      <div apiscope="--temp-w, --temp-h, --apparent-w, --apparent-h, --weather-w, --weather-h">
+        <api-source apiname="--temp-w, --temp-h"
+          style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/temperature)">
+          <template shadowrootmode="open">
+            <style>
+              :host::before {
+                position: absolute;
+                width: 0;
+                min-width: .1px;
+                height: 0;
+                line-height: .1px;
+                font-size: 0;
+                content: var(--api);
+                display: inline flow-root;
+                overflow: hidden;
+                scroll-timeline: --api-width, --api-height;
+                scroll-timeline-axis: x, y;
+              }
+              :host([apiname^="--"][apiname*=","])::before {
+                scroll-timeline-name: attr(apiname type(*));
+              }
+            </style>
+          </template>
+        </api-source>
+        <api-source apiname="--apparent-w, --apparent-h"
+          style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/apparent-temperature)">
+          <template shadowrootmode="open">
+            <style>
+              :host::before {
+                position: absolute;
+                width: 0;
+                min-width: .1px;
+                height: 0;
+                line-height: .1px;
+                font-size: 0;
+                content: var(--api);
+                display: inline flow-root;
+                overflow: hidden;
+                scroll-timeline: --api-width, --api-height;
+                scroll-timeline-axis: x, y;
+              }
+              :host([apiname^="--"][apiname*=","])::before {
+                scroll-timeline-name: attr(apiname type(*));
+              }
+            </style>
+          </template>
+        </api-source>
+        <api-source apiname="--weather-w, --weather-h"
+          style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/weather-code)">
+          <template shadowrootmode="open">
+            <style>
+              :host::before {
+                position: absolute;
+                width: 0;
+                min-width: .1px;
+                height: 0;
+                line-height: .1px;
+                font-size: 0;
+                content: var(--api);
+                display: inline flow-root;
+                overflow: hidden;
+                scroll-timeline: --api-width, --api-height;
+                scroll-timeline-axis: x, y;
+              }
+              :host([apiname^="--"][apiname*=","])::before {
+                scroll-timeline-name: attr(apiname type(*));
+              }
+            </style>
+          </template>
+        </api-source>
+        <div class="temp" apitarget="--temp-w, --temp-h">
+          <div class="apparent" apitarget="--apparent-w, --apparent-h"></div>
+        </div>
+        <div class="weather" apitarget="--weather-w, --weather-h"></div>
+      </div>
+    </template>
+  </weather-display>
+  <column-generator-demo>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/column-generator/style.css);
+        /* ::column::scroll-markerなどをカスタムする */
+        div {
+          width: 100px;
+          height: 100px;
+          padding: 100px;
+          border: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+          --column-width: 62px;
+          --column-height: 66px;
+          --column-gap: 200px;
+          --row-gap: 200px;
+        }
+        ::after {
+          background: light-dark(oklch(85% .08 35), oklch(45% .1 35));
+        }
+        ::column {
+          scroll-snap-align: center;
+        }
+        ::column::scroll-marker {
+          content: counter(column-index);
+          background: light-dark(oklch(78% .1 155), oklch(42% .09 155));
+          width: calc(--column-index() * 5px);
+        }
+        ::column::scroll-marker {
+          content: --active-class(hello, 'bbb');
+        }
+        ::column::scroll-marker:hover {
+          content: --role(world, 'aaa');
+        }
+        @function --to-class(--index <integer>) returns <custom-ident> {
+          result: if(
+            style(--index: 4): hello;
+          );
+        }
+        @function --to-role() returns <custom-ident> {
+          result: if(
+            style(--class: hello): world;
+          );
+        }
+        @function --to-element() returns <custom-ident> {
+          result: if(
+            style(--role: hello): div;
+            style(--class: hello): div;
+            else: div;
+          );
+        }
+      </style>
+      <div colcount="5" rowcount="4" mapping navigate></div>
+    </template>
+  </column-generator-demo>
+  <p>todo-listはshadow DOMの正規登録必須なので除外</p>
+  <digital-clock>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/api-getter/style.css);
+        .clock {
+          counter-reset:
+            hour --get-time(h)
+            minute --get-time(m)
+            second --get-time(s);
+          &::after {
+            content:
+              counter(hour, decimal-leading-zero) ':'
+              counter(minute, decimal-leading-zero) ':'
+              counter(second, decimal-leading-zero);
+          }
+        }
+        @function --get-time(--t type(h | m | s)) returns <integer> {
+          result: --api-ok(if(
+            style(--t: h): --api-value(h);
+            style(--t: m): round(down, --api-value(w) / 60);
+            style(--t: s): mod(--api-value(w), 60);
+          ));
+        }
+      </style>
+      <div class="container" apiscope>
+        <api-source style="--api: url(https://css-api.surahotoke.workers.dev/info/datetime/clock)">
+          <template shadowrootmode="open">
+            <style>
+              :host::before {
+                position: absolute;
+                width: 0;
+                min-width: .1px;
+                height: 0;
+                line-height: .1px;
+                font-size: 0;
+                content: var(--api);
+                display: inline flow-root;
+                overflow: hidden;
+                scroll-timeline: --api-width, --api-height;
+                scroll-timeline-axis: x, y;
+              }
+              :host([apiname^="--"][apiname*=","])::before {
+                scroll-timeline-name: attr(apiname type(*));
+              }
+            </style>
+          </template>
+        </api-source>
+        <div class="clock" apitarget></div>
+      </div>
+    </template>
+  </digital-clock>
+  <macbook-keyboard>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/column-generator/style.css);
+        :host {
+          width: fit-content;
+        }
+        ::scroll-marker-group {
+          box-shadow: inset 0 0 12px #222;
+          margin-inline: auto;
+          display: flex;
+          flex-wrap: wrap;
+          width: 1326px;
+          height: 540px;
+          padding: 12px;
+          gap: 12px;
+          border-radius: 16px;
+          counter-reset: column-index key 1;
+          anchor-name: --keyboard;
+        }
+        ::column::scroll-marker {
+          background: #222;
+          box-shadow: 0 0 2px 3px #fff3;
+          counter-increment: column-index var(--key-counter,);
+          font: 15px / 16px var(--DEFAULT_MONOSPACE);
+          white-space: pre;
+          color: white;
+          content: counter(column-index, keyboard-layout) '\A' counter(column-index, key-layout) '\A';
+          width: fit-content;
+          display: flex;
+          align-items: end;
+          --padding: 14px;
+          padding: 0 0 var(--padding) var(--padding);
+          box-sizing: border-box;
+          min-width: 80px;
+          text-indent: calc(80px - var(--padding));
+          word-spacing: calc(25px - 1ch);
+          tab-size: calc(151px - var(--padding));
+          max-width: 306px;
+          overflow: hidden;
+          height: 80px;
+          border-radius: 8px;
+        }
+        ::column::scroll-marker:hover { filter: brightness(.5) }
+        ::column::scroll-marker:hover:active { filter: brightness(3) }
+        ::column::scroll-marker:target-before { --key-counter: key }
+        ::column::scroll-marker:target-current {
+          background: #111;
+          box-shadow: 0 0 2px 3px white;
+          transition: 150ms;
+        }
+        ::before {
+          background: #333;
+          color: white;
+          position: absolute;
+          position-anchor: --keyboard;
+          position-area: bottom;
+          top: 12px;
+          font: 30px 'Apple Symbols', 'Hiragino Sans';
+          white-space: pre;
+          content: counter(key, key-name);
+          padding: 20px 40px;
+          border-radius: 16px;
+        }
+        @counter-style keyboard-layout { symbols:
+          '  ' '' '' '' '' '' '' '' '' '' '' '' '' ''
+          ' ' '' '' '' '' '' '' '' '' '' '' '' '' ' '
+          '' '' '' '' '' '' '' '' '' '' '' '' '' '  '
+          ' ' '' '' '' '' '' '' '' '' '' '' '' '' ' '
+          '\9' '' '' '' '' '' '' '' '' '' '' '' '\9'
+          '' '' ' ' ' ' '\9\9\9' ' ' ' ' '' '' '' ''
+        }
+        @counter-style key-layout { symbols:
+          'esc' '　F1' '　F2' '　F3' '　F4' '　F5' '　F6' '　F7' '　F8' '　F9' '　F10' '　F11' '　F12' 'Touch\AID\A'
+          '1\A' '2\A' '3\A' '4\A' '5\A' '6\A' '7\A' '8\A' '9\A' '0\A' '-\A' '^\A' '¥\A' '　　　　⌫'
+          '⇥' 'Q\A' 'W\A' 'E\A' 'R\A' 'T\A' 'Y\A' 'U\A' 'I\A' 'O\A' 'P\A' '@\A' '[\A' '　　　　　\2002⏎'
+          '⌃\A\A control' 'A\A' 'S\A' 'D\A' 'F\A' 'G\A' 'H\A' 'J\A' 'K\A' 'L\A' ';\A' ':\A' ']\A' '　　　　⏎'
+          '⇧' 'Z\A' 'X\A' 'C\A' 'V\A' 'B\A' 'N\A' 'M\A' ',\A' '.\A' '/\A' '_\A' '　　　　　　　⇧'
+          '⇪' '⌥\A\A option' '⌘\A\A command' 'ABC' '　　　　　　　　space\A' '　　あいう' '　　　　⌘\A\A\2004　command' 'fn　🌐\FE0E' '　←\A' '　↑\Aーーー\A　↓' '　→\A'
+        }
+        @counter-style key-name { symbols:
+          'esc' 'F1' 'F2' 'F3' 'F4' 'F5' 'F6' 'F7' 'F8' 'F9' 'F10' 'F11' 'F12' 'Touch ID'
+          '1' '2' '3' '4' '5' '6' '7' '8' '9' '0' '-' '^' '¥' '⌫'
+          '⇥' 'Q' 'W' 'E' 'R' 'T' 'Y' 'U' 'I' 'O' 'P' '@' '[' '⏎'
+          '⌃\A control' 'A' 'S' 'D' 'F' 'G' 'H' 'J' 'K' 'L' ';' ':' ']' '⏎'
+          '⇧' 'Z' 'X' 'C' 'V' 'B' 'N' 'M' ',' '.' '/' '_' '⇧'
+          '⇪' '⌥\A option' '⌘\A command' 'ABC' 'space' 'あいう' '⌘\A command' 'fn 🌐' '←' '↑\A↓' '→'
+        }
+      </style>
+      <div class="keyboard" columns="80"></div>
+    </template>
+  </macbook-keyboard>
+  <dice-cube>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/column-generator/style.css);
+        .dice {
+          --size: 240px;
+          width: var(--size);
+          height: var(--size);
+          --column-width: var(--size);
+          --column-height: var(--size);
+          --face-rate: .5;
+          --face-size: calc(var(--face-rate) * var(--size));
+          border: solid;
+          scroll-behavior: smooth;
+          scroll-snap-type: both mandatory;
+          animation:
+            var(--column-generator-animation),
+            decode-x linear,
+            decode-y linear;
+          animation-timeline: auto, auto, scroll(self x), scroll(self);
+          animation-composition: replace, add, replace, replace;
+          --decode-x: var(--dice-cube-decode-x);
+          --decode-y: var(--dice-cube-decode-y);
+        }
+        ::scroll-marker-group {
+          border: solid;
+          display: grid;
+          place-items: center;
+          perspective: 800px;
+          perspective-origin: right top;
+          transform-style: preserve-3d;
+        }
+        ::column {
+          scroll-snap-align: center;
+        }
+        ::column::scroll-marker {
+          position: absolute;
+          box-shadow: inset 0 0 0 3px light-dark(oklch(25% .02 265), oklch(30% .03 265));
+          border-radius: 2px;
+          backface-visibility: hidden;
+        }
+        ::column::scroll-marker {
+          width: --role(face, var(--face-size), 0);
+          height: --role(face, var(--face-size), 0);
+          transform: --role(face,
+            rotateY(calc(var(--decode-x) * -1turn)) rotateX(calc(var(--decode-y) * 1turn))
+            if(
+              style(--class: xp): translateX(calc(var(--face-size) / 2)) rotateY(90deg);
+              style(--class: yn): translateY(calc(var(--face-size) / -2)) rotateX(90deg);
+              style(--class: zp): translateZ(calc(var(--face-size) / 2));
+              style(--class: xn): translateX(calc(var(--face-size) / -2)) rotateY(-90deg);
+              style(--class: yp): translateY(calc(var(--face-size) / 2)) rotateX(-90deg);
+              style(--class: zn): translateZ(calc(var(--face-size) / -2)) rotateY(180deg);
+            )
+          );
+          --r: calc(var(--face-size) * .1);
+          background: --role(face, if(
+            style(--class: yn):
+              --dot(50%, 50%, calc(var(--r) * 1.5), oklch(50% .19 29));
+            style(--class: zp):
+              --dot(30%, 30%, var(--r)),
+              --dot(70%, 70%, var(--r));
+            style(--class: xp):
+              --dot(25%, 25%, var(--r)),
+              --dot(50%, 50%, var(--r)),
+              --dot(75%, 75%, var(--r));
+            style(--class: xn):
+              --dot(25%, 25%, var(--r)),
+              --dot(75%, 25%, var(--r)),
+              --dot(25%, 75%, var(--r)),
+              --dot(75%, 75%, var(--r));
+            style(--class: zn):
+              --dot(25%, 25%, var(--r)),
+              --dot(75%, 25%, var(--r)),
+              --dot(50%, 50%, var(--r)),
+              --dot(25%, 75%, var(--r)),
+              --dot(75%, 75%, var(--r));
+            style(--class: yp):
+              --dot(30%, 20%, var(--r)),
+              --dot(30%, 50%, var(--r)),
+              --dot(30%, 80%, var(--r)),
+              --dot(70%, 20%, var(--r)),
+              --dot(70%, 50%, var(--r)),
+              --dot(70%, 80%, var(--r));
+          ));
+          background-color: --role(face, light-dark(oklch(97% .008 95), oklch(85% .015 95)), transparent);
+        }
+        @function --to-class(--index <integer>) returns <custom-ident> {
+          result: if(
+            style(--index: 8): yn;
+            style(--index: 11): zn;
+            style(--index: 12): xp;
+            style(--index: 13): zp;
+            style(--index: 14): xn;
+            style(--index: 18): yp;
+          );
+        }
+        @function --to-role() returns <custom-ident> {
+          result: if(
+            style(
+              (--class: xp) or
+              (--class: yp) or
+              (--class: zp) or
+              (--class: xn) or
+              (--class: yn) or
+              (--class: zn)): face;
+          );
+        }
+        @function --dot(--x <length-percentage>, --y <length-percentage>, --r <length>, --color <color>: oklch(28% .02 265)) returns <image> {
+          result: radial-gradient(circle var(--r) at var(--x) var(--y), var(--color) 100%, transparent 0);
+        }
+        @keyframes decode-x {
+          from { --dice-cube-decode-x: 0 }
+          to { --dice-cube-decode-x: 1 }
+        }
+        @keyframes decode-y {
+          from { --dice-cube-decode-y: 0 }
+          to { --dice-cube-decode-y: 1 }
+        }
+      </style>
+      <div class="dice" colcount="5" rowcount="5" mapping navigate></div>
+    </template>
+  </dice-cube>
+  <function-render>
+    <template shadowrootmode="open">
+      <style>
+        @import url(lib/column-generator/style.css);
+        .render {
+          --f_s: --column-count();
+          animation: time 3s linear infinite;
+          --t: var(--function-render-t);
+        }
+        ::scroll-marker-group {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          width: 500px;
+          height: 200px;
+          overflow: hidden;
+          outline: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+        }
+        ::column::scroll-marker {
+          --x: --function-render-get-x();
+          display: flex;
+          width: calc(500px / var(--f_s));
+          height: abs(--f());
+          transform-origin: bottom;
+          translate: 0 -50%;
+          rotate: calc(.25turn * (1 - sign(--f())));
+          --background: if(
+            style(rem(round(var(--f_s) * var(--x)), 2) = 0): light-dark(oklch(58% .15 155 / .6), oklch(72% .15 155 / .55));
+            else: light-dark(oklch(46% .13 265 / .55), oklch(60% .12 265 / .5));
+          );
+          background: var(--background);
+          border-top: solid light-dark(oklch(30% .02 265), oklch(85% .01 90));
+        }
+        @function --f() returns <length> {
+          --xt: calc(var(--x) + var(--t));
+          result: calc(50px * sin(3turn * var(--xt)) + 30px * cos(7turn * var(--xt)));
+        }
+        @function --function-render-get-x() returns <number> {
+          result: calc(var(--column-position-x) / 100% - .5);
+        }
+        @keyframes time {
+          to { --function-render-t: 1 }
+        }
+      </style>
+      <div class="render" columns="200" selfmapping></div>
+    </template>
+  </function-render>
+  <iframe class="comment" width="400" height="600" src="embeds/comment/"></iframe>
+</body>
+</html>
