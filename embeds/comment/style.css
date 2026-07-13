@@ -4,8 +4,9 @@ body,
   height: stretch;
 }
 
-html {
-  background: oklch(97% .005 90);
+body {
+  background-color: light-dark(oklch(97% .005 90), oklch(21% .015 265));
+  color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
 }
 
 .rename-form {
@@ -42,6 +43,7 @@ html {
     anchor-name: --name;
   }
   > img {
+    background: white;
     max-width: 70vw;
     height: 1em;
   }
