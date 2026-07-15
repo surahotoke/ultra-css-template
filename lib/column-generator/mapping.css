@@ -1,4 +1,5 @@
-/** mapping: true */
+/* mapping: true */
+
 [mapping]:not([mapping="false"]):not([mapping="self"]) {
   --init-unit-duration: .1s;
   --init-duration: calc(var(--n) * var(--init-unit-duration));
@@ -79,7 +80,8 @@
   to { --column-generator-column-i: var(--n) }
 }
 
-/** mapping: self */
+/* mapping: self */
+
 [mapping="self"] {
   &::column {
     timeline-scope: --column-generator-position-x, --column-generator-position-y;
@@ -113,6 +115,7 @@
 }
 
 /* mapping: true | self */
+
 [mapping]:not([mapping="false"]) {
   :host:has(&) {
     counter-reset: active-index hoist-state;

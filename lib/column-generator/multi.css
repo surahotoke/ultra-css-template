@@ -1,4 +1,5 @@
 /* navigate && mapping: true */
+
 [navigate][mapping]:not([mapping="false"]):not([mapping="self"]) {
   column-count: --loaded(var(--col-n), 1);
   --column-generator-animation:
