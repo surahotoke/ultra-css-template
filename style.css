@@ -32,7 +32,7 @@ body > * {
 
 ::view-transition-old(.children) {
   transform-origin: left;
-  animation: old linear 1s;
+  animation: old linear 1s both;
 }
 
 ::view-transition-new(.children) {
