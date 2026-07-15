@@ -27,7 +27,7 @@
 ## ライブラリ（lib/）
 
 - **api-getter** — css-api が SVG の寸法にエンコードした値を、scroll-timeline とアニメーションだけでデコードする機構。HTTP ステータスの取得（`--api-status()`）や成否分岐（`--api-ok()`）も CSS 関数で提供
-- **column-generator** — `columns` と `::column::scroll-marker` を使い、1 つの要素から大量の描画要素を生成する機構。mapping / self-mapping / navigate の各モードで、要素へのインデックス・クラス・ロール付与や 2 次元配置に対応
+- **column-generator** — `columns` と `::column::scroll-marker` を使い、1 つの要素から大量の描画要素を生成する機構。mapping / navigate の各モードで、要素へのインデックス・クラス・ロール付与や 2 次元配置に対応
 - **duplicator-layout** — contenteditable 領域内で duplicator-slot を複製起点として機能させるためのレイアウト機構
 
 ## 埋め込み（embeds/）

@@ -27,7 +27,7 @@ Latest desktop Chrome (Chrome 150+ recommended). Chrome on iPhone is not support
 ## Libraries (lib/)
 
 - **api-getter** — Decodes the values that css-api encodes into SVG dimensions, using nothing but scroll timelines and animations. Also provides CSS functions for reading the HTTP status (`--api-status()`) and branching on success (`--api-ok()`)
-- **column-generator** — Uses `columns` and `::column::scroll-marker` to generate a large number of drawable elements from a single element. Its mapping / self-mapping / navigate modes support assigning indexes, classes, and roles to elements, as well as 2D placement
+- **column-generator** — Uses `columns` and `::column::scroll-marker` to generate a large number of drawable elements from a single element. Its mapping / navigate modes support assigning indexes, classes, and roles to elements, as well as 2D placement
 - **duplicator-layout** — A layout mechanism that makes duplicator-slot work as a duplication origin inside a contenteditable area
 
 ## Embeds (embeds/)
