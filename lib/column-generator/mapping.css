@@ -1,3 +1,16 @@
+/**
+ * # Value
+ * The attribute must take one of the following values:
+ *
+ * - `true` or an empty string, which indicates that columns are mapped by initialization time.
+ * - `self`, which indicates that columns are mapped by their own position.
+ * - `false`, which indicates that columns are not mapped.
+ *
+ * If the attribute is given without a value, like `<div columns="5" mapping></div>`, its value is treated as an empty string.
+ * If this attribute is missing, columns are not mapped.
+ * If its value is invalid, columns are mapped by initialization time.
+ */
+
 /* mapping: true */
 
 [mapping]:not([mapping="false"]):not([mapping="self"]) {

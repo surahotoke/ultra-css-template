@@ -1,3 +1,10 @@
+/**
+ * # Values
+ * ## <dashed-ident>#
+ * A comma-separated list of two or more <dashed-ident> referencing the api-sources shared in this scope
+ *
+ * If the attribute is given without a value, or its value is invalid, the default `--api-width, --api-height` is used.
+ */
 [apiscope] {
   timeline-scope: --api-width, --api-height;
 }
@@ -6,6 +13,13 @@
   timeline-scope: attr(apiscope type(*));
 }
 
+/**
+ * # Values
+ * ## <dashed-ident>#
+ * A comma-separated list of two or more <dashed-ident> referencing the api-sources being subscribed to
+ *
+ * If the attribute is given without a value, or its value is invalid, the default `--api-width, --api-height` is used.
+ */
 [apitarget] {
   --api-getter-animation:
     api-getter-decode-w linear,
