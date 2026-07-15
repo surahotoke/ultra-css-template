@@ -1,32 +1,32 @@
-/** mapping用 */
+/** mapping: true用 */
 @function --to-class(--index <integer>) returns <custom-ident> {
   result: if(
     style(--index: 4): hello;
   );
 }
 
-/** self-mapping用 */
+/** mapping: self用 */
 @function --to-class(--x <percentage>, --y <percentage>) returns <custom-ident> {
   result: if(
     style((--x: 34%) and (--y: 24%)): hello;
   );
 }
 
-/** self-mapping用（hoist利用） */
+/** mapping: self用（hoist利用） */
 @function --to-index(--x <percentage>, --y <percentage>) returns <integer> {
   result: if(
     style((--x: 34%) and (--y: 24%)): 1;
   );
 }
 
-/** mapping | self-mapping用 */
+/** mapping: true | self用 */
 @function --to-role() returns <custom-ident> {
   result: if(
     style(--class: hello): world;
   );
 }
 
-/** mapping | self-mapping用 */
+/** mapping: true | self用 */
 @function --to-element() returns <custom-ident> {
   result: if(
     style(--role: hello): div;

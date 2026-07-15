@@ -1,5 +1,4 @@
-@import url(default.css);
-@import url(mapping.css);
-@import url(self-mapping.css);
-@import url(navigate.css);
-@import url(multi.css);
+@import url(default.css) layer;
+@import url(mapping.css) layer;
+@import url(navigate.css) layer;
+@import url(multi.css) layer;

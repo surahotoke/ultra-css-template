@@ -1,39 +1,37 @@
-[mapping] {
+/** mapping: true */
+[mapping]:not([mapping="false"]):not([mapping="self"]) {
   --init-unit-duration: .1s;
   --init-duration: calc(var(--n) * var(--init-unit-duration));
   --column-generator-animation: column-generator-init var(--init-duration) steps(var(--n), jump-start) both;
   animation: var(--column-generator-animation);
   --column-count: var(--column-generator-column-i);
   columns: --column-count();
-}
+  &::before {
+    background: #aaaa;
+    --column-generator-loading-percent: calc(100 * progress(--column-count(), 0,  var(--n) - 1));
+    --column-generator-transition: --column-generator-loading-percent var(--init-unit-duration) linear;
+    transition: var(--column-generator-transition);
+    @starting-style { --column-generator-loading-percent: 0 }
+    counter-reset: loading var(--column-generator-loading-percent);
+    content: 'loading... ' counter(loading, decimal-leading-zero) '\9%';
+    position: absolute;
+    position-anchor: --main;
+    position-area: center;
+    width: stretch;
+    height: stretch;
+    display: --loaded(none, grid);
+    place-content: center;
+  }
 
-[mapping]::before {
-  background: #aaaa;
-  --column-generator-loading-percent: calc(100 * progress(--column-count(), 0,  var(--n) - 1));
-  --column-generator-transition: --column-generator-loading-percent var(--init-unit-duration) linear;
-  transition: var(--column-generator-transition);
-  @starting-style { --column-generator-loading-percent: 0 }
-  counter-reset: loading var(--column-generator-loading-percent);
-  content: 'loading... ' counter(loading, decimal-leading-zero) '\9%';
-  position: absolute;
-  position-anchor: --main;
-  position-area: center;
-  width: stretch;
-  height: stretch;
-  display: --loaded(none, grid);
-  place-content: center;
-}
+  &::scroll-marker-group { anchor-name: --main }
 
-[mapping]::scroll-marker-group {
-  anchor-name: --main;
-}
-
-[mapping]::column {
-  animation: column-generator-init var(--init-duration) linear reverse --loaded(paused, running);
-  --column-index: var(--column-generator-column-i);
-  --class: --loaded(--to-class(var(--column-index)));
-  --role: --to-role();
-  --element: --to-element();
+  &::column {
+    animation: column-generator-init var(--init-duration) linear reverse --loaded(paused, running);
+    --column-index: var(--column-generator-column-i);
+    --class: --loaded(--to-class(var(--column-index)));
+    --role: --to-role();
+    --element: --to-element();
+  }
 }
 
 @function --column-index() returns <integer> {
@@ -79,4 +77,111 @@
 
 @keyframes column-generator-init {
   to { --column-generator-column-i: var(--n) }
+}
+
+/** mapping: self */
+[mapping="self"] {
+  &::column {
+    timeline-scope: --column-generator-position-x, --column-generator-position-y;
+    animation:
+      column-generator-position-x linear reverse,
+      column-generator-position-y linear reverse;
+    animation-timeline: --column-generator-position-x, --column-generator-position-y;
+    animation-range: contain cover;
+    --column-index: --to-index(var(--column-position-x), var(--column-position-y));
+    --class: --to-class(if(
+      style(--column-index: initial): var(--column-position-x), var(--column-position-y);
+      else: --column-index();
+    ));
+    --role: --to-role();
+    --element: --to-element();
+  }
+
+  &::column::scroll-marker {
+    view-timeline: --column-generator-position-x x, --column-generator-position-y y;
+  }
+}
+
+@keyframes column-generator-position-x {
+  from { --column-position-x: 0% }
+  to { --column-position-x: 100% }
+}
+
+@keyframes column-generator-position-y {
+  from { --column-position-y: 0% }
+  to { --column-position-y: 100% }
+}
+
+/* mapping: true | self */
+[mapping]:not([mapping="false"]) {
+  :host:has(&) {
+    counter-reset: active-index hoist-state;
+  }
+
+  &::column::scroll-marker:hover:active {
+    counter-increment: column-index active-index --column-index();
+  }
+
+  &::column::scroll-marker:active {
+    --column-generator-transition: if(style(--pulse-tap: 1): pointer-events linear 75ms allow-discrete);
+    transition: var(--column-generator-transition);
+    pointer-events: if(style(--pulse-tap: 1): none);
+  }
+
+  :host:has(&)::after {
+    content: counter(hoist-state, column-generator-encode-w1) counter(active-index, column-generator-encode-w0);
+    position: absolute;
+    display: block;
+    white-space: pre;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 1px;
+    letter-spacing: 1px;
+    word-spacing: 120px;
+    overflow: hidden;
+    scroll-timeline: --column-generator-state x;
+  }
+
+  :host:has(&) {
+    timeline-scope: --column-generator-state;
+    animation: column-generator-decode linear;
+    animation-timeline: --column-generator-state;
+    animation-range: -1px;
+    --active-index: --column-generator-decode(0);
+    --active-class: --to-class(var(--active-index));
+  }
+}
+
+@counter-style column-generator-encode-w0 {
+  system: symbolic;
+  symbols: '　';
+  fallback: -none;
+}
+
+@counter-style column-generator-encode-w1 {
+  system: symbolic;
+  symbols: ' ';
+  fallback: -none;
+}
+
+@function --active-class(--target-class <custom-ident>, --match-value, --fallback: .) {
+  result: if(
+    style(--active-class: var(--target-class)): var(--match-value);
+    style(--fallback: .): revert-rule;
+    else: var(--fallback);
+  );
+}
+
+@function --column-generator-decode(--k <integer>) returns <integer> {
+  --x: round(1 / var(--column-generator-decode) - 1);
+  result: if(
+    style(--k: 0): mod(var(--x), 121);
+    style(--k: 1): round(down, var(--x) / 121);
+  );
+}
+
+@keyframes column-generator-decode {
+  from { --column-generator-decode: 0 }
+  to { --column-generator-decode: 1 }
 }
