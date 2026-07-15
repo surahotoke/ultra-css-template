@@ -4,7 +4,7 @@
 
 最新の CSS 機能だけでロジックを組む作品集・テンプレート。JS は index.html の onload 1行のみ（コンポーネントの読み込みと複製のためのローダ）で、コンポーネントのロジック——状態管理・データ取得・描画——はすべて CSS が担う。
 
-**デモ:** https://ultra-css-template.surahotoke.workers.dev/
+**Live demo:** https://ultra-css-template.surahotoke.workers.dev/
 
 ## 動作環境
 デスクトップ版の最新 Chrome 前提（Chrome 150+ 推奨）。iPhone の Chrome は WebKit ベースのため非対応。`@function` / `if()` / `::column::scroll-marker` / Anchor Positioning / `text-fit` / scroll-triggered animations（`timeline-trigger` / `animation-trigger`）など、出荷直後の機能を積極的に使用している。
@@ -43,6 +43,14 @@ property/    @property 登録（アニメーション対象のカスタムプロ
 embeds/      iframe 埋め込み用の独立ページ
 utility.css  汎用 CSS 関数（--random, --get-bit など）
 ```
+
+## JS なし版（no-js.html）
+
+`index.html` は onload 1行のローダで各コンポーネントを fetch し shadow root に流し込む方式だが、`no-js.html` はその展開後の状態を丸ごと静的に書き出した版。各コンポーネントの shadow root を `<template shadowrootmode="open">`（Declarative Shadow DOM）としてインラインに展開しているため、JS を一切使わず動作する——ブラウザで JavaScript を無効化しても動く。
+
+**Live demo (no-JS):** https://ultra-css-template.surahotoke.workers.dev/no-js
+
+ローダがない分、それに依存する機能は調整・除外している。`count` による複製が使えないため `offset-colorful-css` は粒子の `<div>` を10個手書きし、`todo-list` はカスタム要素の正規登録が必須なため除外している。
 
 ## 関連
 

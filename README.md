@@ -4,7 +4,7 @@
 
 A showcase and template of logic built entirely with cutting-edge CSS. The only JavaScript is a one-line `onload` in index.html (a loader that fetches and duplicates components) — all component logic, including state management, data fetching, and rendering, is done in CSS.
 
-**Demo:** https://ultra-css-template.surahotoke.workers.dev/
+**Live demo:** https://ultra-css-template.surahotoke.workers.dev/
 
 ## Requirements
 Latest desktop Chrome (Chrome 150+ recommended). Chrome on iPhone is not supported, as it is WebKit-based. This project makes heavy use of freshly shipped features such as `@function` / `if()` / `::column::scroll-marker` / Anchor Positioning / `text-fit`, and scroll-triggered animations (`timeline-trigger` / `animation-trigger`).
@@ -43,6 +43,14 @@ property/    @property registrations (custom properties targeted by animations)
 embeds/      Standalone pages for iframe embedding
 utility.css  General-purpose CSS functions (--random, --get-bit, etc.)
 ```
+
+## No-JS version (no-js.html)
+
+`index.html` relies on a one-line `onload` loader to fetch each component and inject it into a shadow root. `no-js.html` is the fully static equivalent: every component's shadow root is written out inline as a `<template shadowrootmode="open">` (Declarative Shadow DOM), so the page runs with zero JavaScript — it works even with JavaScript disabled in the browser.
+
+**Live demo (no-JS):** https://ultra-css-template.surahotoke.workers.dev/no-js
+
+Because there is no loader, features that depend on it are adjusted or dropped: the `count`-based duplication is unavailable (e.g. `offset-colorful-css` hand-writes its ten particle `<div>`s), and `todo-list` is omitted since it requires a real custom-element registration.
 
 ## Related
 
