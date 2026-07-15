@@ -59,7 +59,7 @@
   <weather-display>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/api-getter/style.css);
+        @import url(lib/api-getter/style.css) layer;
         .temp {
           --temperature: --api-ok(round(--api-value() / 10 - 273.15));
           counter-reset: temp var(--temperature);
@@ -210,7 +210,7 @@
   <column-generator-demo>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/column-generator/style.css);
+        @import url(lib/column-generator/style.css) layer;
         /* ::column::scroll-markerなどをカスタムする */
         div {
           width: 100px;
@@ -264,7 +264,7 @@
   <digital-clock>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/api-getter/style.css);
+        @import url(lib/api-getter/style.css) layer;
         .clock {
           counter-reset:
             hour --get-time(h)
@@ -315,7 +315,7 @@
   <macbook-keyboard>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/column-generator/style.css);
+        @import url(lib/column-generator/style.css) layer;
         :host {
           width: fit-content;
         }
@@ -407,7 +407,7 @@
   <dice-cube>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/column-generator/style.css);
+        @import url(lib/column-generator/style.css) layer;
         .dice {
           --size: 240px;
           width: var(--size);
@@ -530,7 +530,7 @@
   <function-render>
     <template shadowrootmode="open">
       <style>
-        @import url(lib/column-generator/style.css);
+        @import url(lib/column-generator/style.css) layer;
         .render {
           --f_s: --column-count();
           animation: time 3s linear infinite;
@@ -571,7 +571,7 @@
           to { --function-render-t: 1 }
         }
       </style>
-      <div class="render" columns="200" selfmapping></div>
+      <div class="render" columns="200" mapping="self"></div>
     </template>
   </function-render>
   <iframe class="comment" width="400" height="600" src="embeds/comment/"></iframe>
