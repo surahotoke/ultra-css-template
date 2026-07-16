@@ -22,7 +22,7 @@
 }
 
 :host([apiname^="--"][apiname*=","])::before {
-  scroll-timeline-name: attr(apiname type(*));
+  scroll-timeline-name: attr(apiname type(<custom-ident>#));
 }
 
 </style>

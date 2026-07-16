@@ -10,7 +10,7 @@
 }
 
 [apiscope^="--"][apiscope*=","] {
-  timeline-scope: attr(apiscope type(*));
+  timeline-scope: attr(apiscope type(<custom-ident>#));
 }
 
 /**
@@ -37,7 +37,7 @@
 }
 
 [apitarget^="--"][apitarget*=","] {
-  animation-timeline: attr(apitarget type(*));
+  animation-timeline: attr(apitarget type(<custom-ident>#));
 }
 
 /**
