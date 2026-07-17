@@ -47,9 +47,9 @@ height にはステータスも詰め込んでおり（`900 × floor(value / BAS
 - **width（連続 animate）**：時刻の連続的な進行を表す。ただし小数になるため、整数前提の api-getter では値が大きくなるほど小数状態での誤差で震える。この震えは 3600 程度までなら許容範囲。60 段階を離散で書くのは綺麗でないので、width は連続にしている。
 - **height（24 段階の離散 animate）**：height は「時」を表し 24 段階しかないので離散化し、小数状態そのものをなくして誤差を消している。もう一つの理由として、height はステータスも詰め込んでいるため、段数は 24 でも値としては `900 × 24` まで大きくなる。これを連続値にすると width よりずっと大きい値が小数で震えることになり壊れる。
 
-## pulse-tap：75ms `allow-discrete` のフレーム設計
+## pulse-tap：37.5ms `allow-discrete` のフレーム設計
 
-`pulse-tap` の transition に使う `75ms allow-discrete` は、判定単位が 37.5ms（= 8.33333ms × 4.5）になるように選んである。
+`pulse-tap` の transition に使う `37.5ms step-end allow-discrete` は、判定単位が 37.5ms（= 8.33333ms × 4.5）になるように選んである。
 
 - これを利用する animation の 1 段階分を 50ms（= 8.33333ms × 6）にしておく。
 - 判定に固定で 1 フレームを消費する。

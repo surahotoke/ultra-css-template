@@ -139,7 +139,7 @@
   }
 
   &::column::scroll-marker:active {
-    --column-generator-transition: if(style(--pulse-tap: 1): pointer-events linear 75ms allow-discrete);
+    --column-generator-transition: if(style(--pulse-tap: 1): pointer-events 37.5ms step-end allow-discrete);
     transition: var(--column-generator-transition);
     pointer-events: if(style(--pulse-tap: 1): none);
   }
