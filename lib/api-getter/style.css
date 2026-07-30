@@ -22,36 +22,32 @@
  */
 [apitarget] {
   --api-getter-animation:
-    api-getter-decode-w linear,
-    api-getter-decode-h linear;
+    api-getter-decode-w linear reverse,
+    api-getter-decode-h linear reverse;
+  --api-getter-animation-timeline: --api-width, --api-height;
+  --api-getter-animation-range:
+    exit calc(var(--api-LIMIT_VALUE) * -2px),
+    exit calc(var(--api-LIMIT_VALUE) * -2px);
   animation: var(--api-getter-animation);
-  animation-timeline: --api-width, --api-height;
-  animation-range: -1px;
-  --api-status: calc(mod(
-      round(down, 1 / var(--api-getter-decode-h) - 1),
-    900)
-    + 100
-  );
+  animation-timeline: var(--api-getter-animation-timeline);
+  animation-range: var(--api-getter-animation-range);
+  --api-status: calc(mod(var(--api-getter-decode-h), 900) + 100);
   --api-status-text: --api-status-text();
   --api-ok: --api-ok();
 }
 
 [apitarget^="--"][apitarget*=","] {
-  animation-timeline: attr(apitarget type(<custom-ident>#));
+  --api-getter-animation-timeline: attr(apitarget type(<custom-ident>#));
 }
 
 /**
-  w: 0 ≤ value ≤ 316780
-  h: 0 ≤ value ≤ 350
-  s: 0 ≤ value ≤ 999999
+  w: -8388607 ≤ value ≤ 8388607
+  h: 0 ≤ value ≤ 18640
 */
-@function --api-value(--axis type(w | h | s): s) returns <integer> {
-  --w: round(1 / var(--api-getter-decode-w) - 1);
-  --h: round(down, round(1 / var(--api-getter-decode-h) - 1) / 900);
+@function --api-value(--axis type(w | h): w) returns <integer> {
   result: if(
-    style(--axis: w): var(--w);
-    style(--axis: h): var(--h);
-    style(--axis: s): calc(var(--api-BASE) * var(--h) + var(--w));
+    style(--axis: w): var(--api-getter-decode-w);
+    else: round(down, var(--api-getter-decode-h) / 900);
   );
 }
 
@@ -126,7 +122,7 @@
 
 @function --api-ok(--value: 1, --fallback: 0, --status <integer>: --api-status()) {
   result: if(
-    style(197 <= var(--status) < 300): var(--value);
+    style(200 <= var(--status) < 300): var(--value);
     else: var(--fallback);
   );
 }
@@ -134,11 +130,10 @@
 @function --custom-status-text(--_) { result: '' }
 
 @keyframes api-getter-decode-w {
-  from { --api-getter-decode-w: 0 }
-  to { --api-getter-decode-w: 1 }
+  from { --api-getter-decode-w: calc(-1 * var(--api-LIMIT_VALUE)) }
+  to { --api-getter-decode-w: var(--api-LIMIT_VALUE) }
 }
 
 @keyframes api-getter-decode-h {
-  from { --api-getter-decode-h: 0 }
-  to { --api-getter-decode-h: 1 }
+  to { --api-getter-decode-h: calc(var(--api-LIMIT_VALUE) * 2) }
 }

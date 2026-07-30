@@ -1,5 +1,9 @@
+@function --get-digit(--x <integer>, --place <integer>: 1, --base <integer>: 10) returns <integer> {
+  result: mod(round(down, var(--x) / var(--place)), var(--base));
+}
+
 @function --get-bit(--x <integer>, --k <integer>: 0) returns <integer> {
-  result: mod(round(down, var(--x) / pow(2, var(--k))), 2);
+  result: --get-digit(var(--x), pow(2, var(--k)), 2);
 }
 
 @function --len(--num <integer>) returns <integer> {

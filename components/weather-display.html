@@ -3,12 +3,12 @@
 @import url(lib/api-getter/style.css) layer;
 
 .temp {
-  --temperature: --api-ok(round(--api-value() / 10 - 273.15));
+  --temperature: --api-ok(round(--api-value() / 10));
   counter-reset: temp var(--temperature);
 }
 
 .apparent {
-  --apparent-temperature: --api-ok(round(--api-value() / 10 - 273.15));
+  --apparent-temperature: --api-ok(round(--api-value() / 10));
   --temperature-diff: calc(var(--apparent-temperature) - var(--temperature));
   counter-reset:
     temp-diff var(--temperature-diff);

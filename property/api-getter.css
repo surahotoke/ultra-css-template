@@ -1,7 +1,7 @@
-@property --api-BASE {
+@property --api-LIMIT_VALUE {
   syntax: '<integer>';
   inherits: false;
-  initial-value: 316781;
+  initial-value: 8388607;
 }
 
 @property --api-status {
@@ -22,14 +22,32 @@
   initial-value: 0;
 }
 
+@property --api-getter-animation {
+  syntax: '*';
+  inherits: false;
+  initial-value:;
+}
+
+@property --api-getter-animation-timeline {
+  syntax: '*';
+  inherits: false;
+  initial-value:;
+}
+
+@property --api-getter-animation-range {
+  syntax: '*';
+  inherits: false;
+  initial-value:;
+}
+
 @property --api-getter-decode-w {
   syntax: '<number>';
   inherits: false;
-  initial-value: 1;
+  initial-value: 0;
 }
 
 @property --api-getter-decode-h {
   syntax: '<number>';
   inherits: false;
-  initial-value: 1;
+  initial-value: 0;
 }

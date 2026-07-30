@@ -16,11 +16,12 @@
 }
 
 @function --get-time(--t type(h | m | s)) returns <integer> {
-  result: --api-ok(if(
-    style(--t: h): --api-value(h);
-    style(--t: m): round(down, --api-value(w) / 60);
-    style(--t: s): mod(--api-value(w), 60);
-  ));
+  --time: --api-ok(--api-value());
+  result: if(
+    style(--t: h): --get-digit(var(--time), 3600, 24);
+    style(--t: m): --get-digit(var(--time), 60, 60);
+    style(--t: s): --get-digit(var(--time), 1, 60);
+  );
 }
 
 </style>
