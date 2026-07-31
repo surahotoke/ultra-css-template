@@ -12,7 +12,7 @@ width / height の上限は 16777214px。DevTools に 16777200 と表示され�
 計測枠と対象の両方に寸法がある形では、どちらも上限以下でも合計が 2²⁴ px を超えると読み値に誤差が出る。計測枠のサイズを 0 にすればこれには当たらない。
 
 ### 読み取り範囲を最大にする指定
-計測枠は `width: 0; height: 0; overflow: auto`、中身に寸法を持たせる。読み手は `animation-range: -100% calc(-100% + Lpx)` で、keyframes をレンジ長 L と同じ幅で張る。
+計測枠は `width: 0; height: 0; overflow: hidden`、中身に寸法を持たせる。読み手は `animation-range: -100% calc(-100% + Lpx)` で、keyframes をレンジ長 L と同じ幅で張る。
 
 開始と終了の両方に `-100%` を置くと、レンジの位置は中身の寸法に追随したまま、レンジの長さは px 分の固定値になる。静止位置（スクロール量 0）の進行度は中身の寸法に正比例するので、読み値が寸法そのものになる。
 
@@ -31,6 +31,8 @@ width / height の上限は 16777214px。DevTools に 16777200 と表示され�
 `min-width` / `min-height` の `.1px` は、サイズ 0 でも animation を有効にするため。
 
 inline 要素に画像を置く場合、`line-height: 0` では足りず `font-size: 0` が必要。
+
+`overflow` は `auto` ではなく `hidden` にする。読み取りに必要なのはスクロール可能量だけで、実際にスクロールできる必要はない。`auto` の場合、計測枠が tab でフォーカスでき、そのまま矢印キーでスクロールして読み値の書き換えができてしまう。（`hidden` の場合、tabでフォーカスできない）
 
 ## 寸法の作り方
 読み方は上記で共通なので、違うのは寸法をどう作るかだけ。counter で幅を組む（`::column::scroll-marker` のように counter しか届かない場所で使える。上限は counter-style の 121 段 × 文字種で決まる）、`grid-template` のトラック幅を animation で書く、画像の寸法をサーバから受け取る（api-source）の 3 通り。
