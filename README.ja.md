@@ -39,9 +39,9 @@
 ```
 components/  Web Components として読み込まれる HTML（<style> + マークアップ）
 lib/         コンポーネント横断で使う CSS 機構
-property/    @property 登録（アニメーション対象のカスタムプロパティ）
+property/    @property 登録（アニメーション対象のカスタムプロパティ、inherits: false が適切なもの）
 embeds/      iframe 埋め込み用の独立ページ
-utility.css  汎用 CSS 関数（--random, --get-bit など）
+utility.css  汎用 CSS 関数（--get-digit, --random など）
 ```
 
 ## JS なし版（no-js.html）

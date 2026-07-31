@@ -39,9 +39,9 @@ Latest desktop Chrome (Chrome 150+ recommended). Chrome on iPhone is not support
 ```
 components/  HTML loaded as Web Components (<style> + markup)
 lib/         CSS mechanisms shared across components
-property/    @property registrations (custom properties targeted by animations)
+property/    @property registrations (custom properties targeted by animations, and ones that want inherits: false)
 embeds/      Standalone pages for iframe embedding
-utility.css  General-purpose CSS functions (--random, --get-bit, etc.)
+utility.css  General-purpose CSS functions (--get-digit, --random, etc.)
 ```
 
 ## No-JS version (no-js.html)

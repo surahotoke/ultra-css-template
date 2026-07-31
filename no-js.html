@@ -61,11 +61,11 @@
       <style>
         @import url(lib/api-getter/style.css) layer;
         .temp {
-          --temperature: --api-ok(round(--api-value() / 10 - 273.15));
+          --temperature: --api-ok(round(--api-value() / 10));
           counter-reset: temp var(--temperature);
         }
         .apparent {
-          --apparent-temperature: --api-ok(round(--api-value() / 10 - 273.15));
+          --apparent-temperature: --api-ok(round(--api-value() / 10));
           --temperature-diff: calc(var(--apparent-temperature) - var(--temperature));
           counter-reset:
             temp-diff var(--temperature-diff);
@@ -135,21 +135,21 @@
           style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/temperature)">
           <template shadowrootmode="open">
             <style>
-              :host::before {
+              :host {
                 position: absolute;
                 width: 0;
-                min-width: .1px;
                 height: 0;
-                line-height: .1px;
                 font-size: 0;
-                content: var(--api);
-                display: inline flow-root;
-                overflow: hidden;
-                scroll-timeline: --api-width, --api-height;
-                scroll-timeline-axis: x, y;
+                overflow: auto;
+                scroll-timeline: --api-width x, --api-height y;
               }
-              :host([apiname^="--"][apiname*=","])::before {
+              :host([apiname^="--"][apiname*=","]) {
                 scroll-timeline-name: attr(apiname type(<custom-ident>#));
+              }
+              :host::before {
+                content: var(--api);
+                min-width: .1px;
+                min-height: .1px;
               }
             </style>
           </template>
@@ -158,21 +158,21 @@
           style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/apparent-temperature)">
           <template shadowrootmode="open">
             <style>
-              :host::before {
+              :host {
                 position: absolute;
                 width: 0;
-                min-width: .1px;
                 height: 0;
-                line-height: .1px;
                 font-size: 0;
-                content: var(--api);
-                display: inline flow-root;
-                overflow: hidden;
-                scroll-timeline: --api-width, --api-height;
-                scroll-timeline-axis: x, y;
+                overflow: auto;
+                scroll-timeline: --api-width x, --api-height y;
               }
-              :host([apiname^="--"][apiname*=","])::before {
+              :host([apiname^="--"][apiname*=","]) {
                 scroll-timeline-name: attr(apiname type(<custom-ident>#));
+              }
+              :host::before {
+                content: var(--api);
+                min-width: .1px;
+                min-height: .1px;
               }
             </style>
           </template>
@@ -181,21 +181,21 @@
           style="--api: url(https://css-api.surahotoke.workers.dev/info/weather/weather-code)">
           <template shadowrootmode="open">
             <style>
-              :host::before {
+              :host {
                 position: absolute;
                 width: 0;
-                min-width: .1px;
                 height: 0;
-                line-height: .1px;
                 font-size: 0;
-                content: var(--api);
-                display: inline flow-root;
-                overflow: hidden;
-                scroll-timeline: --api-width, --api-height;
-                scroll-timeline-axis: x, y;
+                overflow: auto;
+                scroll-timeline: --api-width x, --api-height y;
               }
-              :host([apiname^="--"][apiname*=","])::before {
+              :host([apiname^="--"][apiname*=","]) {
                 scroll-timeline-name: attr(apiname type(<custom-ident>#));
+              }
+              :host::before {
+                content: var(--api);
+                min-width: .1px;
+                min-height: .1px;
               }
             </style>
           </template>
@@ -278,32 +278,33 @@
           }
         }
         @function --get-time(--t type(h | m | s)) returns <integer> {
-          result: --api-ok(if(
-            style(--t: h): --api-value(h);
-            style(--t: m): round(down, --api-value(w) / 60);
-            style(--t: s): mod(--api-value(w), 60);
-          ));
+          --time: --api-ok(--api-value());
+          result: if(
+            style(--t: h): --get-digit(var(--time), 3600, 24);
+            style(--t: m): --get-digit(var(--time), 60, 60);
+            style(--t: s): --get-digit(var(--time), 1, 60);
+          );
         }
       </style>
       <div class="container" apiscope>
         <api-source style="--api: url(https://css-api.surahotoke.workers.dev/info/datetime/clock)">
           <template shadowrootmode="open">
             <style>
-              :host::before {
+              :host {
                 position: absolute;
                 width: 0;
-                min-width: .1px;
                 height: 0;
-                line-height: .1px;
                 font-size: 0;
-                content: var(--api);
-                display: inline flow-root;
-                overflow: hidden;
-                scroll-timeline: --api-width, --api-height;
-                scroll-timeline-axis: x, y;
+                overflow: auto;
+                scroll-timeline: --api-width x, --api-height y;
               }
-              :host([apiname^="--"][apiname*=","])::before {
-                scroll-timeline-name: attr(apiname type(<custom-ident>));
+              :host([apiname^="--"][apiname*=","]) {
+                scroll-timeline-name: attr(apiname type(<custom-ident>#));
+              }
+              :host::before {
+                content: var(--api);
+                min-width: .1px;
+                min-height: .1px;
               }
             </style>
           </template>
@@ -423,7 +424,7 @@
             var(--column-generator-animation),
             decode-x linear,
             decode-y linear;
-          animation-timeline: auto, auto, scroll(self x), scroll(self);
+          animation-timeline: auto, auto, scroll(self x), scroll(self y);
           animation-composition: replace, add, replace, replace;
           --decode-x: var(--dice-cube-decode-x);
           --decode-y: var(--dice-cube-decode-y);
