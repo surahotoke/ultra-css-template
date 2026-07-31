@@ -1,0 +1,13 @@
+/** width / height の上限 */
+@property --LIMIT_SIZE {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 16777214;
+}
+
+/** --LIMIT_SIZE の半分 */
+@property --HALF_LIMIT_SIZE {
+  syntax: '<integer>';
+  inherits: false;
+  initial-value: 8388607;
+}

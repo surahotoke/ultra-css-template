@@ -163,7 +163,7 @@
     timeline-scope: --column-generator-state;
     animation: column-generator-decode linear;
     animation-timeline: --column-generator-state;
-    animation-range: -1px;
+    animation-range: -100% calc(var(--LIMIT_SIZE) * 1px + 1px - 100%);
     --active-index: --column-generator-decode(0);
     --active-class: --to-class(var(--active-index));
   }
@@ -190,14 +190,12 @@
 }
 
 @function --column-generator-decode(--k <integer>) returns <integer> {
-  --x: round(1 / var(--column-generator-decode) - 1);
   result: if(
-    style(--k: 0): mod(var(--x), 121);
-    style(--k: 1): round(down, var(--x) / 121);
+    style(--k: 0): mod(var(--column-generator-decode), 121);
+    style(--k: 1): round(down, var(--column-generator-decode) / 121);
   );
 }
 
 @keyframes column-generator-decode {
-  from { --column-generator-decode: 0 }
-  to { --column-generator-decode: 1 }
+  to { --column-generator-decode: calc(var(--LIMIT_SIZE) + 1) }
 }

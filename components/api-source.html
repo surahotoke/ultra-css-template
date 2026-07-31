@@ -8,23 +8,22 @@
  * If the attribute is given without a value, or its value is invalid, the default `--api-width, --api-height` is used.
  */
 :host {
-  display: block;
   position: absolute;
   width: 0;
   height: 0;
+  font-size: 0;
   overflow: auto;
+  scroll-timeline: --api-width x, --api-height y;
+}
+
+:host([apiname^="--"][apiname*=","]) {
+  scroll-timeline-name: attr(apiname type(<custom-ident>#));
 }
 
 :host::before {
   content: var(--api);
-  display: inline flow-root;
   min-width: .1px;
   min-height: .1px;
-  view-timeline: --api-width x, --api-height y;
-}
-
-:host([apiname^="--"][apiname*=","])::before {
-  view-timeline-name: attr(apiname type(<custom-ident>#));
 }
 
 </style>

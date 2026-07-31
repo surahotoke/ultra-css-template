@@ -47,7 +47,7 @@
 }
 
 @property --column-generator-decode {
-  syntax: '<number>';
+  syntax: '<integer>';
   inherits: false;
-  initial-value: 1;
+  initial-value: 0;
 }

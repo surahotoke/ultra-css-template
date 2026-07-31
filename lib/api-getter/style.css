@@ -22,12 +22,12 @@
  */
 [apitarget] {
   --api-getter-animation:
-    api-getter-decode-w linear reverse,
-    api-getter-decode-h linear reverse;
+    api-getter-decode-w linear,
+    api-getter-decode-h linear;
   --api-getter-animation-timeline: --api-width, --api-height;
   --api-getter-animation-range:
-    exit calc(var(--api-LIMIT_VALUE) * -2px),
-    exit calc(var(--api-LIMIT_VALUE) * -2px);
+    -100% calc(var(--LIMIT_SIZE) * 1px + 1px - 100%),
+    -100% calc(var(--LIMIT_SIZE) * 1px + 1px - 100%);
   animation: var(--api-getter-animation);
   animation-timeline: var(--api-getter-animation-timeline);
   animation-range: var(--api-getter-animation-range);
@@ -130,10 +130,10 @@
 @function --custom-status-text(--_) { result: '' }
 
 @keyframes api-getter-decode-w {
-  from { --api-getter-decode-w: calc(-1 * var(--api-LIMIT_VALUE)) }
-  to { --api-getter-decode-w: var(--api-LIMIT_VALUE) }
+  from { --api-getter-decode-w: calc(-1 * var(--HALF_LIMIT_SIZE)) }
+  to { --api-getter-decode-w: calc(var(--HALF_LIMIT_SIZE) + 1) }
 }
 
 @keyframes api-getter-decode-h {
-  to { --api-getter-decode-h: calc(var(--api-LIMIT_VALUE) * 2) }
+  to { --api-getter-decode-h: calc(var(--LIMIT_SIZE) + 1) }
 }
