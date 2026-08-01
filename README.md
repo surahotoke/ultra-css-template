@@ -52,6 +52,12 @@ utility.css  General-purpose CSS functions (--get-digit, --random, etc.)
 
 Because there is no loader, features that depend on it are adjusted or dropped: the `count`-based duplication is unavailable (e.g. `offset-colorful-css` hand-writes its ten particle `<div>`s), and `todo-list` is omitted since it requires a real custom-element registration.
 
+## Design notes
+Both documents are in Japanese only.
+
+- [INTERNALS.md](INTERNALS.md) — why each mechanism uses the values and structures it does
+- [HISTORY.md](HISTORY.md) — the turning points where the design changed
+
 ## Related
 
 - [css-api](https://github.com/surahotoke/css-api) — The data-supplying API this template uses

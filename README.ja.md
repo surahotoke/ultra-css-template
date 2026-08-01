@@ -52,6 +52,11 @@ utility.css  汎用 CSS 関数（--get-digit, --random など）
 
 ローダがない分、それに依存する機能は調整・除外している。`count` による複製が使えないため `offset-colorful-css` は粒子の `<div>` を10個手書きし、`todo-list` はカスタム要素の正規登録が必須なため除外している。
 
+## 設計メモ
+
+- [INTERNALS.md](INTERNALS.md) — 各機構がなぜその値・その構造なのか
+- [HISTORY.md](HISTORY.md) — 設計が大きく変わった転換点の記録
+
 ## 関連
 
 - [css-api](https://github.com/surahotoke/css-api) — このテンプレートが利用するデータ供給 API
