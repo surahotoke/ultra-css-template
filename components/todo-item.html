@@ -3,14 +3,14 @@
 @import url(lib/duplicator-layout/style.css) layer;
 
 :host {
-  background: light-dark(oklch(93.5% .012 90), oklch(27% .018 265));
+  background: var(--color-surface-container);
   display: none;
   align-items: center;
   gap: 4px;
   width: stretch;
   max-width: 500px;
   padding: 4px;
-  border: solid light-dark(oklch(80% .015 90), oklch(40% .02 265));
+  border: solid var(--color-outline-variant);
   border-radius: 12px;
   transition: .4s;
 }
@@ -45,10 +45,10 @@
 }
 
 @scope(.done-button) {
-  background: light-dark(oklch(84% .07 155), oklch(45% .09 155));
+  background: color-mix(in oklab, var(--color-success), transparent 75%);
   width: 24px;
   aspect-ratio: 1;
-  border: solid 2px light-dark(oklch(60% .09 155), oklch(65% .1 155));
+  border: solid 2px var(--color-success);
   border-radius: 8px;
   display: grid;
   place-content: center;
@@ -63,22 +63,25 @@
 
 @scope(.title) {
   resize: none;
+  background: var(--color-surface);
+  color: var(--color-on-surface);
   flex: 1;
   max-width: 300px;
   field-sizing: content;
   :scope::placeholder {
     color: transparent;
-    background: text linear-gradient(to right in oklch longer hue, oklch(62% .16 30), oklch(62% .16 29));
+    --bg: oklch(from var(--color-secondary) 62% .16 h);
+    background: text linear-gradient(to right in oklch longer hue, var(--bg), var(--bg));
     opacity: light-dark(.35, .5);
   }
 }
 
 @scope(.delete-button) {
-  background: light-dark(oklch(88% .04 35), oklch(38% .06 35));
-  color: light-dark(oklch(45% .09 35), oklch(80% .06 35));
+  background: color-mix(in oklab, var(--color-error), transparent 75%);
+  color: var(--color-on-surface);
   width: 24px;
   aspect-ratio: 1;
-  border: solid 2px light-dark(oklch(65% .1 35), oklch(58% .12 35));
+  border: solid 2px var(--color-error);
   border-radius: 4px;
   display: grid;
   place-content: center;
@@ -86,7 +89,10 @@
   :scope::before {
     content: 'x';
   }
-  :scope:hover { background: oklch(56% .19 30) }
+  :scope:hover {
+    background: var(--color-error);
+    color: var(--color-surface);
+  }
   :scope:checked::before {
     content: '←';
   }

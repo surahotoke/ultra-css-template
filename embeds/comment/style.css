@@ -5,8 +5,15 @@ body,
 }
 
 body {
-  background-color: light-dark(oklch(97% .005 90), oklch(21% .015 265));
-  color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
+  background: var(--color-surface-container);
+  color: var(--color-on-surface);
+}
+
+button,
+textarea,
+.rename {
+  background: var(--color-surface-container-highest);
+  color: var(--color-on-surface);
 }
 
 .rename-form {
@@ -43,7 +50,6 @@ body {
     anchor-name: --name;
   }
   > img {
-    background: white;
     max-width: 70vw;
     height: 1em;
   }

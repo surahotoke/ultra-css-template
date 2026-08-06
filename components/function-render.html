@@ -9,13 +9,14 @@
 }
 
 ::scroll-marker-group {
+  background: var(--color-surface-container);
   position: absolute;
   display: flex;
   align-items: center;
   width: 500px;
   height: 200px;
   overflow: hidden;
-  outline: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+  outline: solid var(--color-outline);
 }
 
 ::column::scroll-marker {
@@ -31,7 +32,7 @@
     else: light-dark(oklch(46% .13 265 / .55), oklch(60% .12 265 / .5));
   );
   background: var(--background);
-  border-top: solid light-dark(oklch(30% .02 265), oklch(85% .01 90));
+  border-top: solid var(--color-on-surface);
 }
 
 @function --f() returns <length> {

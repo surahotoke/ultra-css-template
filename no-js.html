@@ -6,8 +6,9 @@
   <meta name="color-scheme" content="light dark">
   <meta name="text-scale" content="scale">
   <title>ultra-css template (no-js version)</title>
-  <link rel="stylesheet" href="utility.css">
   <link rel="stylesheet" href="property/style.css">
+  <link rel="stylesheet" href="color.css">
+  <link rel="stylesheet" href="utility.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -213,24 +214,25 @@
         @import url(lib/column-generator/style.css) layer;
         /* ::column::scroll-markerなどをカスタムする */
         div {
+          background: var(--color-surface-container);
           width: 100px;
           height: 100px;
           padding: 100px;
-          border: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+          border: solid var(--color-outline);
           --column-width: 62px;
           --column-height: 66px;
           --column-gap: 200px;
           --row-gap: 200px;
         }
         ::after {
-          background: light-dark(oklch(85% .08 35), oklch(45% .1 35));
+          background: color-mix(in oklab, var(--color-secondary), transparent 70%);
         }
         ::column {
           scroll-snap-align: center;
         }
         ::column::scroll-marker {
           content: counter(column-index);
-          background: light-dark(oklch(78% .1 155), oklch(42% .09 155));
+          background: color-mix(in oklab, var(--color-primary), transparent 55%);
           width: calc(--column-index() * 5px);
         }
         ::column::scroll-marker {
@@ -430,7 +432,8 @@
           --decode-y: var(--dice-cube-decode-y);
         }
         ::scroll-marker-group {
-          border: solid;
+          background: var(--color-surface-container);
+          border: solid var(--color-outline);
           display: grid;
           place-items: center;
           perspective: 800px;
@@ -461,7 +464,7 @@
             )
           );
           --r: calc(var(--face-size) * .1);
-          background: --role(face, if(
+          background: --role(face, {if(
             style(--class: yn):
               --dot(50%, 50%, calc(var(--r) * 1.5), oklch(50% .19 29));
             style(--class: zp):
@@ -489,8 +492,8 @@
               --dot(70%, 20%, var(--r)),
               --dot(70%, 50%, var(--r)),
               --dot(70%, 80%, var(--r));
-          ));
-          background-color: --role(face, light-dark(oklch(97% .008 95), oklch(85% .015 95)), transparent);
+            ), light-dark(oklch(97% .008 95), oklch(85% .015 95))
+          }, transparent);
         }
         @function --to-class(--index <integer>) returns <custom-ident> {
           result: if(
@@ -538,13 +541,14 @@
           --t: var(--function-render-t);
         }
         ::scroll-marker-group {
+          background: var(--color-surface-container);
           position: absolute;
           display: flex;
           align-items: center;
           width: 500px;
           height: 200px;
           overflow: hidden;
-          outline: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+          outline: solid var(--color-outline);
         }
         ::column::scroll-marker {
           --x: --function-render-get-x();
@@ -559,7 +563,7 @@
             else: light-dark(oklch(46% .13 265 / .55), oklch(60% .12 265 / .5));
           );
           background: var(--background);
-          border-top: solid light-dark(oklch(30% .02 265), oklch(85% .01 90));
+          border-top: solid var(--color-on-surface);
         }
         @function --f() returns <length> {
           --xt: calc(var(--x) + var(--t));

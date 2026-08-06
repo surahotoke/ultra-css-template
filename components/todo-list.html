@@ -33,9 +33,9 @@ select,
 }
 
 @scope(option) {
-  background: light-dark(oklch(98.5% .003 90), oklch(27% .015 265));
-  :scope:hover { background: light-dark(oklch(93% .01 265), oklch(34% .02 265)) }
-  :scope:checked { background: light-dark(oklch(88% .03 265), oklch(41% .04 265)) }
+  background: var(--color-surface);
+  :scope:hover { background: color-mix(in oklab, var(--color-primary) 15%, var(--color-surface)) }
+  :scope:checked { background: color-mix(in oklab, var(--color-primary) 30%, var(--color-surface)) }
   :scope::checkmark {
     content: '→';
   }

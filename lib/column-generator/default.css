@@ -28,6 +28,7 @@ div {
 
 ::column::scroll-marker {
   all: initial;
+  color: inherit;
   content: '';
   display: block;
   counter-increment: column-index;

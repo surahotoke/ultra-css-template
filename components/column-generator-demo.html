@@ -5,10 +5,11 @@
 /* ::column::scroll-markerなどをカスタムする */
 
 div {
+  background: var(--color-surface-container);
   width: 100px;
   height: 100px;
   padding: 100px;
-  border: solid light-dark(oklch(40% .02 265), oklch(72% .015 90));
+  border: solid var(--color-outline);
   --column-width: 62px;
   --column-height: 66px;
   --column-gap: 200px;
@@ -16,7 +17,7 @@ div {
 }
 
 ::after {
-  background: light-dark(oklch(85% .08 35), oklch(45% .1 35));
+  background: color-mix(in oklab, var(--color-secondary), transparent 70%);
 }
 
 ::column {
@@ -25,7 +26,7 @@ div {
 
 ::column::scroll-marker {
   content: counter(column-index);
-  background: light-dark(oklch(78% .1 155), oklch(42% .09 155));
+  background: color-mix(in oklab, var(--color-primary), transparent 55%);
   width: calc(--column-index() * 5px);
 }
 

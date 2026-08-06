@@ -24,7 +24,8 @@
 }
 
 ::scroll-marker-group {
-  border: solid;
+  background: var(--color-surface-container);
+  border: solid var(--color-outline);
   display: grid;
   place-items: center;
   perspective: 800px;
@@ -58,7 +59,7 @@
     )
   );
   --r: calc(var(--face-size) * .1);
-  background: --role(face, if(
+  background: --role(face, {if(
     style(--class: yn):
       --dot(50%, 50%, calc(var(--r) * 1.5), oklch(50% .19 29));
     style(--class: zp):
@@ -86,8 +87,8 @@
       --dot(70%, 20%, var(--r)),
       --dot(70%, 50%, var(--r)),
       --dot(70%, 80%, var(--r));
-  ));
-  background-color: --role(face, light-dark(oklch(97% .008 95), oklch(85% .015 95)), transparent);
+    ), light-dark(oklch(97% .008 95), oklch(85% .015 95))
+  }, transparent);
 }
 
 @function --to-class(--index <integer>) returns <custom-ident> {

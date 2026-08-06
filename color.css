@@ -1,0 +1,12 @@
+:root {
+  --color-surface: light-dark(oklch(97% .005 90), oklch(21% .015 265));
+  --color-surface-container: light-dark(oklch(93% .012 90), oklch(27% .018 265));
+  --color-surface-container-highest: light-dark(oklch(88% .015 90), oklch(33% .02 265));
+  --color-on-surface: light-dark(oklch(27% .02 265), oklch(89% .012 90));
+  --color-outline: light-dark(oklch(40% .02 265), oklch(72% .015 90));
+  --color-outline-variant: light-dark(oklch(85% .015 90), oklch(35% .02 265));
+  --color-primary: light-dark(oklch(45% .12 250), oklch(75% .1 245));
+  --color-secondary: light-dark(oklch(55% .1 75), oklch(78% .1 85));
+  --color-error: light-dark(oklch(50% .16 29), oklch(70% .15 25));
+  --color-success: light-dark(oklch(45% .12 155), oklch(72% .12 155));
+}

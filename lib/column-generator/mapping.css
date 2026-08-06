@@ -21,7 +21,7 @@
   --column-count: var(--column-generator-column-i);
   columns: --column-count();
   &::before {
-    background: #aaaa;
+    background: color-mix(in oklab, var(--color-surface), transparent 25%);
     --column-generator-loading-percent: calc(100 * progress(--column-count(), 0,  var(--n) - 1));
     --column-generator-transition: --column-generator-loading-percent var(--init-unit-duration) linear;
     transition: var(--column-generator-transition);

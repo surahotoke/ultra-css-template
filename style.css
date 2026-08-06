@@ -3,8 +3,8 @@
 }
 
 body {
-  background-color: light-dark(oklch(97% .005 90), oklch(21% .015 265));
-  color: light-dark(oklch(27% .02 265), oklch(89% .012 90));
+  background: var(--color-surface);
+  color: var(--color-on-surface);
 }
 
 header {
@@ -12,7 +12,10 @@ header {
   gap: 4px;
 }
 
-header > a { color: inherit }
+header > a {
+  color: var(--color-primary);
+  font-family: serif;
+}
 
 .comment {
   display: block;
