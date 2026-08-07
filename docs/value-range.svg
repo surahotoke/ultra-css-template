@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 296" font-family="'Noto Sans JP', sans-serif" style="color-scheme: light dark">
+  <style>
+    text { fill: light-dark(oklch(25% 0 0), oklch(90% 0 0)) }
+    .axis { fill: none; stroke: light-dark(oklch(25% 0 0), oklch(90% 0 0)); stroke-width: 2 }
+    .tick { stroke: light-dark(oklch(25% 0 0), oklch(90% 0 0)); stroke-width: 2 }
+    .arrow { fill: light-dark(oklch(94% 0 0), oklch(26% 0 0)); stroke: light-dark(oklch(70% 0 0), oklch(45% 0 0)); stroke-width: 2 }
+    .row-label { font-size: 20px }
+    .value { font-size: 18px; text-anchor: middle; font-family: Menlo, Consolas, monospace }
+    .offset { font-size: 22px; font-weight: 700; font-family: Menlo, Consolas, monospace }
+  </style>
+
+  <!-- 上段: SVG の width -->
+  <text class="row-label" x="0" y="24">SVG の width</text>
+  <line class="axis" x1="70" y1="60" x2="930" y2="60"/>
+  <line class="tick" x1="70" y1="50" x2="70" y2="70"/>
+  <line class="tick" x1="500" y1="50" x2="500" y2="70"/>
+  <line class="tick" x1="930" y1="50" x2="930" y2="70"/>
+  <text class="value" x="70" y="92">0</text>
+  <text class="value" x="500" y="92">8388607</text>
+  <text class="value" x="930" y="92">16777214</text>
+
+  <!-- 対応 -->
+  <path class="arrow" d="M481 116 L519 116 L519 156 L539 156 L500 196 L461 156 L481 156 Z"/>
+  <text class="offset" x="559" y="163">− 8388607</text>
+
+  <!-- 下段: keyframes値 -->
+  <text class="row-label" x="0" y="216">keyframes値</text>
+  <line class="axis" x1="70" y1="252" x2="930" y2="252"/>
+  <line class="tick" x1="70" y1="242" x2="70" y2="262"/>
+  <line class="tick" x1="500" y1="242" x2="500" y2="262"/>
+  <line class="tick" x1="930" y1="242" x2="930" y2="262"/>
+  <text class="value" x="70" y="284">-8388607</text>
+  <text class="value" x="500" y="284">0</text>
+  <text class="value" x="930" y="284">8388607</text>
+</svg>

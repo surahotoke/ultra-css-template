@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1511 816" font-family="'Noto Sans JP', sans-serif" style="color-scheme: light dark">
+  <!-- Padding spec: project frame L/R30 T60 B20, top-level frame L/R30 T60 B30 -->
+  <style>
+    .frame { fill: none; stroke: light-dark(oklch(70% 0 0), oklch(45% 0 0)) }
+    .node  { fill: light-dark(oklch(94% 0 0), oklch(26% 0 0)); stroke: light-dark(oklch(70% 0 0), oklch(45% 0 0)) }
+    text   { fill: light-dark(oklch(25% 0 0), oklch(90% 0 0)) }
+    .frame-label { font-size: 18px; text-anchor: middle }
+    .node-label  { font-size: 16px; text-anchor: middle }
+    .lane-label  { font-size: 14px }
+    .flow  { fill: none; stroke: light-dark(oklch(25% 0 0), oklch(90% 0 0)); stroke-width: 2 }
+    .assoc { fill: none; stroke: light-dark(oklch(70% 0 0), oklch(45% 0 0)); stroke-width: 2 }
+    .dotted { stroke-dasharray: 4 4 }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="context-stroke"/>
+    </marker>
+  </defs>
+
+  <!-- ===== External APIs ===== -->
+  <g>
+    <rect class="frame" x="580.5" y="0.5" width="420" height="120" rx="6"/>
+    <text class="frame-label" x="790.5" y="26.5">External APIs</text>
+    <rect class="node" x="610.5" y="40.5" width="180" height="60" rx="4"/>
+    <text class="node-label" x="700.5" y="66.5">Open-Meteo</text>
+    <text class="node-label" x="700.5" y="88.5" font-size="14">Weather</text>
+    <rect class="node" x="810.5" y="40.5" width="170" height="60" rx="4"/>
+    <text class="node-label" x="895.5" y="66.5">Yahoo Finance</text>
+    <text class="node-label" x="895.5" y="88.5" font-size="14">Stocks</text>
+  </g>
+
+  <!-- ===== Cloudflare Workers ===== -->
+  <g>
+    <rect class="frame" x="560.5" y="135.5" width="950" height="680" rx="6"/>
+    <text class="frame-label" x="1035.5" y="163.5">Cloudflare Workers</text>
+
+    <!-- css-api / Hono -->
+    <rect class="frame" x="590.5" y="195.5" width="380" height="400" rx="6"/>
+    <text class="frame-label" x="780.5" y="223.5">css-api / Hono</text>
+    <rect class="node" x="620.5" y="255.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="780.5" y="287.5">info</text>
+    <text class="node-label" x="780.5" y="311.5">Encodes values into SVG dimensions</text>
+    <rect class="node" x="620.5" y="375.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="780.5" y="407.5">view</text>
+    <text class="node-label" x="780.5" y="431.5">Renders text as SVG images</text>
+    <rect class="node" x="620.5" y="495.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="780.5" y="527.5">post</text>
+    <text class="node-label" x="780.5" y="551.5">Accepts form POSTs</text>
+
+    <!-- ultra-css-template (serving) -->
+    <rect class="frame" x="590.5" y="635.5" width="380" height="150" rx="6"/>
+    <text class="frame-label" x="780.5" y="663.5">ultra-css-template</text>
+    <rect class="node" x="620.5" y="695.5" width="320" height="70" rx="4"/>
+    <text class="node-label" x="780.5" y="736.5">Static hosting</text>
+
+    <!-- Resources used by css-api (right column) -->
+    <rect class="node" x="1160.5" y="225.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="1320.5" y="257.5">KV / Cache</text>
+    <text class="node-label" x="1320.5" y="281.5">External API cache</text>
+    <rect class="node" x="1160.5" y="335.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="1320.5" y="367.5">D1</text>
+    <text class="node-label" x="1320.5" y="391.5">Comments</text>
+    <rect class="node" x="1160.5" y="445.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="1320.5" y="477.5">Durable Object</text>
+    <text class="node-label" x="1320.5" y="501.5">Concurrent connections</text>
+    <rect class="node" x="1160.5" y="555.5" width="320" height="80" rx="4"/>
+    <text class="node-label" x="1320.5" y="587.5">Cron Triggers</text>
+    <text class="node-label" x="1320.5" y="611.5">Pre-fetches opening prices</text>
+  </g>
+
+  <!-- ===== Browser ===== -->
+  <g>
+    <rect class="frame" x="0.5" y="165.5" width="420" height="650" rx="6"/>
+    <text class="frame-label" x="210.5" y="193.5">Browser</text>
+
+    <!-- ultra-css-template (running) -->
+    <rect class="frame" x="30.5" y="225.5" width="360" height="435" rx="6"/>
+    <text class="frame-label" x="210.5" y="251.5">ultra-css-template</text>
+    <text class="frame-label" x="210.5" y="273.5">index.html</text>
+    <rect class="node" x="60.5" y="285.5" width="300" height="280" rx="4"/>
+    <text class="node-label" x="210.5" y="413.5">HTML + CSS</text>
+    <text class="node-label" x="210.5" y="437.5">Decodes via scroll timelines</text>
+    <rect class="node" x="60.5" y="585.5" width="300" height="55" rx="4"/>
+    <text class="node-label" x="210.5" y="605.5">One-line onload loader</text>
+    <text class="node-label" x="210.5" y="627.5">Loads &amp; duplicates components</text>
+
+    <rect class="node" x="60.5" y="705.5" width="300" height="80" rx="4"/>
+    <text class="node-label" x="210.5" y="737.5">Cookies</text>
+    <text class="node-label" x="210.5" y="761.5">Poster name / connection ID</text>
+  </g>
+
+  <!-- ===== Lanes (Browser ⇔ css-api) ===== -->
+  <g>
+    <path class="flow" d="M360.5 295.5 H620.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+    <text class="lane-label" x="425.5" y="269.5">url() →</text>
+    <text class="lane-label" x="425.5" y="287.5">← SVG</text>
+
+    <path class="flow" d="M360.5 415.5 H620.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+    <text class="lane-label" x="425.5" y="389.5">url() / img →</text>
+    <text class="lane-label" x="425.5" y="407.5">← SVG</text>
+
+    <path class="flow" d="M360.5 535.5 H620.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+    <text class="lane-label" x="425.5" y="509.5">form POST →</text>
+    <text class="lane-label" x="425.5" y="527.5">← 303 redirect</text>
+
+    <!-- onload ⇔ static hosting -->
+    <path class="flow" d="M360.5 612.5 H440.5 V730.5 H620.5" marker-start="url(#ah)" marker-end="url(#ah)"/>
+    <text class="lane-label" x="445.5" y="705.5">fetch →</text>
+    <text class="lane-label" x="445.5" y="723.5">← Component HTML</text>
+
+    <!-- Cookie auto-attach (dotted, rides on every same-origin request) -->
+    <path class="flow dotted" d="M360.5 755.5 H540.5 V625.5 H780.5 V595.5" marker-end="url(#ah)"/>
+    <text class="lane-label" x="565.5" y="617.5">Auto-attached to every request</text>
+  </g>
+
+  <!-- ===== css-api → External APIs ===== -->
+  <g>
+    <path class="flow" d="M700.5 195.5 V100.5" marker-end="url(#ah)"/>
+    <path class="flow" d="M895.5 195.5 V100.5" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- ===== css-api — resources ===== -->
+  <g>
+    <path class="assoc" d="M970.5 265.5 H1160.5"/>
+    <path class="assoc" d="M970.5 375.5 H1160.5"/>
+    <path class="assoc" d="M970.5 485.5 H1160.5"/>
+    <path class="flow" d="M1160.5 570.5 H970.5" marker-end="url(#ah)"/>
+    <text class="lane-label" x="1000.5" y="562.5">Scheduled runs</text>
+  </g>
+</svg>

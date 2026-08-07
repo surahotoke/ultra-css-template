@@ -9,6 +9,10 @@
 ## 動作環境
 デスクトップ版の最新 Chrome 前提（Chrome 150+ 推奨）。iPhone の Chrome は WebKit ベースのため非対応。`@function` / `if()` / `::column::scroll-marker` / Anchor Positioning / `text-fit` / scroll-triggered animations（`timeline-trigger` / `animation-trigger`）など、出荷直後の機能を積極的に使用している。
 
+## 構成図
+
+![構成図](docs/architecture.ja.svg)
+
 ## コンポーネント（components/）
 
 | コンポーネント | 説明 |
