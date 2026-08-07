@@ -9,6 +9,10 @@ A showcase and template of logic built entirely with cutting-edge CSS. The only 
 ## Requirements
 Latest desktop Chrome (Chrome 150+ recommended). Chrome on iPhone is not supported, as it is WebKit-based. This project makes heavy use of freshly shipped features such as `@function` / `if()` / `::column::scroll-marker` / Anchor Positioning / `text-fit`, and scroll-triggered animations (`timeline-trigger` / `animation-trigger`).
 
+## Architecture
+
+![Architecture](docs/architecture.svg)
+
 ## Components (components/)
 
 | Component | Description |
