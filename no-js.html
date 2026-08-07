@@ -228,14 +228,14 @@
           --row-gap: 200px;
         }
         ::after {
-          background: color-mix(in oklab, var(--color-secondary), transparent 70%);
+          background: color-mix(var(--color-secondary), transparent 70%);
         }
         ::column {
           scroll-snap-align: center;
         }
         ::column::scroll-marker {
           content: counter(column-index);
-          background: color-mix(in oklab, var(--color-primary), transparent 55%);
+          background: color-mix(var(--color-primary), transparent 55%);
           width: calc(--column-index() * 5px);
         }
         ::column::scroll-marker {

@@ -41,9 +41,9 @@
 }
 
 /**
-  w: -8388607 ≤ value ≤ 8388607
-  h: 0 ≤ value ≤ 18640
-*/
+ * w: -8388607 ≤ value ≤ 8388607
+ * h: 0 ≤ value ≤ 18640
+ */
 @function --api-value(--axis type(w | h): w) returns <integer> {
   result: if(
     style(--axis: w): var(--api-getter-decode-w);

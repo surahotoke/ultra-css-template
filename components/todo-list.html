@@ -34,8 +34,8 @@ select,
 
 @scope(option) {
   background: var(--color-surface);
-  :scope:hover { background: color-mix(in oklab, var(--color-primary) 15%, var(--color-surface)) }
-  :scope:checked { background: color-mix(in oklab, var(--color-primary) 30%, var(--color-surface)) }
+  :scope:hover { background: color-mix(var(--color-primary) 15%, var(--color-surface)) }
+  :scope:checked { background: color-mix(var(--color-primary) 30%, var(--color-surface)) }
   :scope::checkmark {
     content: '→';
   }
