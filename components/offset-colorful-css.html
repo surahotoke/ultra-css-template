@@ -8,8 +8,8 @@
 }
 
 div {
-  --offset-random: --random(sibling-index(), var(--offset-colorful-css-distance));
-  background: oklch(from red l c calc(h + mod(var(--offset-random), 150)));
+  --offset-random: --random(150, sibling-index(), var(--offset-colorful-css-distance));
+  background: oklch(from red l c calc(h + var(--offset-random)));
   position: absolute;
   width: 1.6px;
   height: 1.2px;

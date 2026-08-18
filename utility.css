@@ -13,8 +13,8 @@
   );
 }
 
-@function --random(--num <integer>, --seed <number>: 0) returns <integer> {
-  result: round(mod(524287 * sin(999983 * (var(--num) + 5007)) * (91 + 29 * cos(524287 * var(--seed))), 8191));
+@function --random(--range <number>, --num <number>, --seed <number>: 0) returns <number> {
+  result: mod(524287 * sin(999983 * (var(--num) + 5007)) * (91 + 29 * cos(524287 * (var(--seed) + 130))), var(--range));
 }
 
 @function --comma(--value:) {
