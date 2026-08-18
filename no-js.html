@@ -34,7 +34,7 @@
             corner-shape: bevel;
             offset: path('M6 5C6 1 2 1 2 6 2 11 6 11 6 7M12 4C12 0 5 2 10 6 15 10 8 12 8 8M18 4C18 0 11 2 16 6 21 10 14 12 14 8');
             zoom: 5;
-            offset-distance: mod(1% * var(--offset-random), 100%);
+            offset-distance: calc(1% * --random(100, sibling-index(), var(--offset-colorful-css-distance) + 1));
             animation: offset-colorful-css-appear 3s linear both;
             animation-trigger: --offset-colorful-css play-forwards reset;
           }
